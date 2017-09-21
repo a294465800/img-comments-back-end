@@ -5,10 +5,19 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import axios from 'axios'
+import qs from  'qs'
 import 'element-ui/lib/theme-default/index.css'
+import API from './assets/js/api'
 
+axios.defaults.headers = {
+  'Content-type': 'application/x-www-form-urlencoded'
+}
+axios.defaults.withCredentials = true
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.prototype.$http = axios
+Vue.prototype.$qs = qs
+Vue.prototype.$api = API
 
 /**
  * 全局钩子

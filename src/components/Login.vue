@@ -65,12 +65,14 @@ export default {
     login(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          sessionStorage.username = this.loginInfo.username
-          this.$message({
-            type: 'success',
-            message: '登录成功',
+          this.$api.login(this.loginInfo.username, this.loginInfo.password, () => {
+            sessionStorage.username = this.loginInfo.username
+            this.$message({
+              type: 'success',
+              message: '登录成功',
+            })
+            this.$router.push('/')
           })
-          this.$router.push('/')
         } else {
           return false
         }

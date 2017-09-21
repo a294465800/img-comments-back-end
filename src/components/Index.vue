@@ -109,6 +109,11 @@ header::after {
   margin-bottom: 20px;
 }
 
+.operation-top {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 .content-table {
   width: 100%;
   flex: 1;
