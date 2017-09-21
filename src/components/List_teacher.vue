@@ -11,8 +11,9 @@
 
 .operation-search {
   float: right;
-  width: 400px;
+  width: 450px;
 }
+
 </style>
 
 <template>
@@ -32,14 +33,14 @@
         <div class="operation-btn">
           <el-button type="primary" @click="newTeacher">新增老师</el-button>
         </div>
-        <div class="operation-search">
+        <div class="operation-search" @keydown.enter="searchTeacher">
           <el-input placeholder="请输入内容" v-model="search">
-            <el-select v-model="select" slot="prepend" placeholder="请选择">
+            <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
               <el-option label="ID" value="id"></el-option>
               <el-option label="教师名称" value="name"></el-option>
               <el-option label="教师工号" value="cardID"></el-option>
             </el-select>
-            <el-button slot="append" icon="search"></el-button>
+            <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
           </el-input>
         </div>
       </div>
@@ -160,6 +161,11 @@ export default {
 
   methods: {
 
+    //教师搜索
+    searchTeacher(){
+      console.log('hi')
+    },
+
     //老师表单校验
     checkTeacherInfo() {
       if (this.newTeacherInfo.name && this.newTeacherInfo.cardID) {
@@ -256,6 +262,8 @@ export default {
     addMoney(row, column, cellValue) {
       return cellValue + ' 元'
     },
+
+    //教师编辑
     handleEdit(index, row) {
       this.newTeacherInfo.name = row.name
       this.newTeacherInfo.cardID = row.cardID
@@ -339,6 +347,8 @@ export default {
         })
       })
     },
+
+    //教师删除
     handleDelete(index, row) {
       this.$confirm('此操作将删除该教师数据, 是否继续?', '提示', {
         confirmButtonText: '确定',

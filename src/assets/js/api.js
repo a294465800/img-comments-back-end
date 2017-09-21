@@ -7,7 +7,6 @@ export default {
 
   //登录 api
   login(username, password, cb) {
-    console.log(_v.$http)
     _v.$http({
       url: this.data.host + 'login',
       method: 'POST',
