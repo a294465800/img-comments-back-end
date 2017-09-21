@@ -65,7 +65,11 @@ export default {
     login(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$api.login(this.loginInfo.username, this.loginInfo.password, () => {
+          const login = {
+            username: this.loginInfo.username,
+            password: this.loginInfo.password,
+          }
+          this.$api.login(login, () => {
             sessionStorage.username = this.loginInfo.username
             this.$message({
               type: 'success',
@@ -73,6 +77,7 @@ export default {
             })
             this.$router.push('/')
           })
+          this.$router.push('/')
         } else {
           return false
         }

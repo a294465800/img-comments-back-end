@@ -63,7 +63,7 @@ header::after {
 
 .nav-bar {
   position: absolute;
-  width: 250px;
+  width: 200px;
   height: 100%;
   top: 70px;
   left: 0;
@@ -95,7 +95,7 @@ header::after {
   height: 100%;
   top: 70px;
   bottom: 0;
-  left: 250px;
+  left: 200px;
   right: 0;
   background-color: #fff;
   overflow-y: scroll;
@@ -168,7 +168,7 @@ header::after {
         <el-menu-item index="/article">
           <i class="el-icon-document"></i>文章</el-menu-item>
       </el-menu>
-      <p class="copy">2017 &copy; Sennki All Rights Reserved</p>
+      <p class="copy">2017 &copy;<br> Sennki All Rights Reserved</p>
     </nav>
     <!-- /左侧导航 -->
 

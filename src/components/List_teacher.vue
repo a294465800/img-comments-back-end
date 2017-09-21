@@ -13,7 +13,6 @@
   float: right;
   width: 450px;
 }
-
 </style>
 
 <template>
@@ -38,7 +37,7 @@
             <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
               <el-option label="ID" value="id"></el-option>
               <el-option label="教师名称" value="name"></el-option>
-              <el-option label="教师工号" value="cardID"></el-option>
+              <el-option label="教师工号" value="number"></el-option>
             </el-select>
             <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
           </el-input>
@@ -47,7 +46,7 @@
       <el-table :data="tableData" border :stripe="true">
         <el-table-column prop="id" label="ID" width="180"></el-table-column>
         <el-table-column prop="name" label="姓名" min-width="250" align="center"></el-table-column>
-        <el-table-column prop="cardID" label="工号" min-width="200" align="center"></el-table-column>
+        <el-table-column prop="number" label="工号" min-width="200" align="center"></el-table-column>
         <el-table-column prop="times" label="点评次数" width="150" :formatter="addTimes" align="center"></el-table-column>
         <el-table-column prop="money" label="赞助总费用" width="150" :formatter="addMoney" align="center"></el-table-column>
         <el-table-column label="操作" width="250" align="center">
@@ -74,6 +73,28 @@ export default {
   data() {
     return {
 
+      //教师类型
+      teacherTypes: [
+        {
+          id: 1,
+          name: '建筑学',
+        },
+        {
+          id: 2,
+          name: '城规',
+        },
+        {
+          id: 3,
+          name: '美术学'
+        },
+        {
+          id: 4,
+          name: '景观'
+        }
+      ],
+      teacherTypes1: ['建筑学', '城规', '美术学', '景观'],
+      teacherIndex: 0,
+
       //搜索框
       search: '',
       select: '',
@@ -81,94 +102,32 @@ export default {
       //教师信息表单
       newTeacherInfo: {
         name: '',
-        cardID: '',
+        number: '',
       },
 
       total: 32,
       currentPage: 1,
 
-      tableData: [
-        {
-          id: 1,
-          name: '王小虎',
-          cardID: 1002,
-          money: 5,
-          times: 5,
-        }, {
-          id: 2,
-          name: '王小虎',
-          cardID: 1002,
-          money: 30,
-          times: 4,
-        }, {
-          id: 3,
-          name: '王小虎',
-          cardID: 2000,
-          money: 0,
-          times: 35,
-        }, {
-          id: 4,
-          name: '王小虎',
-          cardID: 1002,
-          money: 25.5,
-          times: 2,
-        }, {
-          id: 4,
-          name: '王小虎',
-          cardID: 1121,
-          money: 25.5,
-          times: 2,
-        }, {
-          id: 4,
-          name: '王小虎',
-          cardID: 1002,
-          money: 25.5,
-          times: 2,
-        }, {
-          id: 4,
-          name: '王小虎',
-          cardID: 8090,
-          money: 25.5,
-          times: 2,
-        }, {
-          id: 4,
-          name: '王小虎',
-          cardID: 1002,
-          money: 25.5,
-          times: 2,
-        }, {
-          id: 4,
-          name: '王小虎',
-          cardID: 6053,
-          money: 25.5,
-          times: 2,
-        }, {
-          id: 4,
-          name: '王小虎',
-          cardID: 1002,
-          money: 25.5,
-          times: 2,
-        }, {
-          id: 4,
-          name: '王小虎',
-          cardID: 1002,
-          money: 25.5,
-          times: 2,
-        }
-      ]
+      tableData: [],
     }
+  },
+
+  created() {
+    this.$api.getTeachers('', (res) => {
+      this.tableData = res.data.data
+    })
   },
 
   methods: {
 
     //教师搜索
-    searchTeacher(){
+    searchTeacher() {
       console.log('hi')
     },
 
     //老师表单校验
     checkTeacherInfo() {
-      if (this.newTeacherInfo.name && this.newTeacherInfo.cardID) {
+      if (this.newTeacherInfo.name && this.newTeacherInfo.number) {
         return true
       }
       return false
@@ -217,11 +176,34 @@ export default {
                     },
                     on: {
                       input: value => {
-                        this.newTeacherInfo.cardID = value
+                        this.newTeacherInfo.number = value
                       }
                     }
                   })
               ]),
+            h('el-select',
+              {
+                domProps: {
+                  // value:  this.teacherIndex - 1
+                },
+                props: {
+                  placeholder: '请选择教师类型',
+                  value: this.teacherIndex
+                },
+                on: {
+                  input: value => {
+                    console.log(this)
+                    this.teacherIndex = value
+                    this.$emit('input', value)
+                    // console.log( this.teacherIndex)
+                  }
+                }
+              }, [
+                h('el-option', { props: { key: 1, label: '建筑学', value: 1 } }),
+                h('el-option', { props: { key: 2, label: '城规', value: 2 } }),
+                h('el-option', { props: { key: 3, label: '美术学', value: 3 } }),
+                h('el-option', { props: { key: 4, label: '景观', value: 4 } }),
+              ])
           ]),
         showCancelButton: true,
         confirmButtonText: '确定',
@@ -241,9 +223,12 @@ export default {
           }
         }
       }).then(action => {
-        this.$message({
-          type: 'success',
-          message: '新增成功！'
+        this.$api.addTeacher(this.newTeacherInfo, res => {
+          this.tableData.push(this.newTeacherInfo)
+          this.$message({
+            type: 'success',
+            message: '新增成功！'
+          })
         })
       }).catch(cancel => {
         this.$message({
@@ -266,7 +251,7 @@ export default {
     //教师编辑
     handleEdit(index, row) {
       this.newTeacherInfo.name = row.name
-      this.newTeacherInfo.cardID = row.cardID
+      this.newTeacherInfo.number = row.number
       const h = this.$createElement
       this.$msgbox({
         title: '修改教师',
@@ -306,11 +291,11 @@ export default {
                   {
                     props: {
                       placeholder: '请输入工号',
-                      value: row.cardID,
+                      value: row.number,
                     },
                     on: {
                       input: value => {
-                        this.newTeacherInfo.cardID = value
+                        this.newTeacherInfo.number = value
                       }
                     }
                   })
@@ -335,7 +320,7 @@ export default {
         }
       }).then(action => {
         this.tableData[index].name = this.newTeacherInfo.name
-        this.tableData[index].cardID = this.newTeacherInfo.cardID
+        this.tableData[index].number = this.newTeacherInfo.number
         this.$message({
           type: 'success',
           message: '修改成功！'
