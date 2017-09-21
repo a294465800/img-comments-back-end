@@ -7,6 +7,10 @@
 }
 
 
+
+
+
+
 /* header 样式 */
 
 header {
@@ -55,6 +59,10 @@ header::after {
 }
 
 
+
+
+
+
 /* 左侧导航 */
 
 .nav-bar {
@@ -65,11 +73,25 @@ header::after {
   left: 0;
 }
 
+.copy {
+  position: absolute;
+  left: 0;
+  bottom: 80px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+  font-size: 14px;
+}
+
 .nav-bar ul {
   height: 100%;
 }
 
+
+
 /* 内容 */
+
 .content-wrap {
   position: absolute;
   width: auto;
@@ -81,6 +103,7 @@ header::after {
   background-color: #fff;
   overflow-y: scroll;
   overflow-x: auto;
+  padding: 20px 30px;
 }
 </style>
 
@@ -105,34 +128,40 @@ header::after {
 
     <!-- 左侧导航 -->
     <nav class="nav-bar">
-      <el-menu default-active="2" class="el-menu-vertical-demo" theme="dark" :router="true">
+      <el-menu :default-active="currentOpen" :unique-opened="true" class="el-menu-vertical-demo" theme="dark" :router="true">
         <el-menu-item index="/">
           <i class="el-icon-menu"></i>首页</el-menu-item>
-        <el-submenu index="list">
+        <el-submenu index="/list">
           <template slot="title">
             <i class="el-icon-message"></i>用户信息</template>
           <el-menu-item-group>
-            <el-menu-item index="/student/list">学生用户</el-menu-item>
-            <el-menu-item index="/teacher/list">老师用户</el-menu-item>
+            <el-menu-item index="/list/student">学生用户</el-menu-item>
+            <el-menu-item index="/list/teacher">老师用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="/article">
-          <i class="el-icon-setting"></i>文章</el-menu-item>
+          <i class="el-icon-document"></i>文章</el-menu-item>
       </el-menu>
+      <p class="copy">2017 &copy; Sennki All Rights Reserved</p>
     </nav>
     <!-- /左侧导航 -->
 
     <!-- 右侧内容 -->
-    <section class="content-wrap">
-      <router-view></router-view>
-    </section>
+    <router-view></router-view>
     <!-- 右侧内容 -->
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      currentOpen: this.$route.path
+    }
+  },
 
+  created() {
+  },
 }
 </script>
 

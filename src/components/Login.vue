@@ -33,7 +33,7 @@ h1 {
   <div class="login-wrap">
     <div class="login-part">
       <h1>后台管理系统</h1>
-      <div class="login">
+      <div class="login" @keydown.enter="login('loginInfo')">
         <el-form :label-position="labelPosition" :model="loginInfo" ref="loginInfo">
           <el-form-item label="用户名" prop="username" :rules="[{ required: true, message: '用户名不能为空！'}]">
             <el-input v-model="loginInfo.username" placeholder="用户名"></el-input>
