@@ -7,11 +7,11 @@
 
 .login-part {
   position: fixed;
-  top: 0;
+  top: 25%;
   bottom: 0;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 0 auto;
   width: 500px;
   height: 400px;
 }

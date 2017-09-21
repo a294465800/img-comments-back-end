@@ -9,8 +9,6 @@
 
 
 
-
-
 /* header 样式 */
 
 header {
@@ -46,19 +44,17 @@ header::after {
 }
 
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 
 .nick-name {
   height: 100%;
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
   margin: 0 20px;
 }
-
-
 
 
 
@@ -90,6 +86,7 @@ header::after {
 
 
 
+
 /* 内容 */
 
 .content-wrap {
@@ -104,6 +101,30 @@ header::after {
   overflow-y: scroll;
   overflow-x: auto;
   padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.breadcrumb {
+  margin-bottom: 20px;
+}
+
+.content-table {
+  width: 100%;
+  flex: 1;
+}
+
+@media screen and (max-height: 680px) {
+  .content-table {
+    overflow-y: scroll;
+    overflow-x: auto;
+  }
+}
+
+.pages {
+  height: 120px;
+  text-align: right;
+  margin-top: 20px;
 }
 </style>
 
@@ -119,7 +140,7 @@ header::after {
             <span class="nick-name">SHINING</span>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -162,6 +183,15 @@ export default {
 
   created() {
   },
+
+  methods: {
+
+    //退出
+    logout(){
+      sessionStorage.clear()
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
