@@ -45,6 +45,7 @@
       </div>
       <el-table :data="tableData" border :stripe="true">
         <el-table-column prop="id" label="ID" width="180"></el-table-column>
+        <el-table-column prop="category" label="分类" width="250" :formatter="addCategory" align="center"></el-table-column>
         <el-table-column prop="name" label="姓名" min-width="250" align="center"></el-table-column>
         <el-table-column prop="number" label="工号" min-width="200" align="center"></el-table-column>
         <el-table-column prop="times" label="点评次数" width="150" :formatter="addTimes" align="center"></el-table-column>
@@ -74,26 +75,7 @@ export default {
     return {
 
       //教师类型
-      teacherTypes: [
-        {
-          id: 1,
-          name: '建筑学',
-        },
-        {
-          id: 2,
-          name: '城规',
-        },
-        {
-          id: 3,
-          name: '美术学'
-        },
-        {
-          id: 4,
-          name: '景观'
-        }
-      ],
-      teacherTypes1: ['建筑学', '城规', '美术学', '景观'],
-      teacherIndex: 0,
+      teacherTypes: ['建筑学', '城规', '美术学', '景观'],
 
       //搜索框
       search: '',
@@ -133,9 +115,17 @@ export default {
       return false
     },
 
+    //同步分类
+    SyncTeacherTyep(event) {
+      const select = document.querySelector('#selectInput input')
+      select.value = event.target.innerHTML.replace(/[<>\/span]/g, '')
+    },
+
     //新增老师
     newTeacher() {
+      const self = this
       const h = this.$createElement
+      console.log(h)
       this.$msgbox({
         title: '新增教师',
         message: h('el-form',
@@ -184,25 +174,65 @@ export default {
             h('el-select',
               {
                 domProps: {
-                  // value:  this.teacherIndex - 1
+                  id: 'selectInput',
                 },
                 props: {
                   placeholder: '请选择教师类型',
-                  value: this.teacherIndex
                 },
                 on: {
                   input: value => {
-                    console.log(this)
-                    this.teacherIndex = value
-                    this.$emit('input', value)
-                    // console.log( this.teacherIndex)
+                    this.newTeacherInfo.category = value + 1
                   }
                 }
               }, [
-                h('el-option', { props: { key: 1, label: '建筑学', value: 1 } }),
-                h('el-option', { props: { key: 2, label: '城规', value: 2 } }),
-                h('el-option', { props: { key: 3, label: '美术学', value: 3 } }),
-                h('el-option', { props: { key: 4, label: '景观', value: 4 } }),
+                h('el-option', {
+                  props: {
+                    key: 1,
+                    label: '建筑学',
+                    value: 1
+                  },
+                  nativeOn: {
+                    click: event => {
+                      this.SyncTeacherTyep(event)
+                    }
+                  }
+                }),
+                h('el-option', {
+                  props: {
+                    key: 2,
+                    label: '城规',
+                    value: 2
+                  },
+                  nativeOn: {
+                    click: event => {
+                      this.SyncTeacherTyep(event)
+                    }
+                  }
+                }),
+                h('el-option', {
+                  props: {
+                    key: 3,
+                    label: '美术学',
+                    value: 3
+                  },
+                  nativeOn: {
+                    click: event => {
+                      this.SyncTeacherTyep(event)
+                    }
+                  }
+                }),
+                h('el-option', {
+                  props: {
+                    key: 4,
+                    label: '景观',
+                    value: 4
+                  },
+                  nativeOn: {
+                    click: event => {
+                      this.SyncTeacherTyep(event)
+                    }
+                  }
+                }),
               ])
           ]),
         showCancelButton: true,
@@ -224,7 +254,6 @@ export default {
         }
       }).then(action => {
         this.$api.addTeacher(this.newTeacherInfo, res => {
-          this.tableData.push(this.newTeacherInfo)
           this.$message({
             type: 'success',
             message: '新增成功！'
@@ -236,6 +265,11 @@ export default {
           message: '取消了操作'
         })
       })
+    },
+
+    //修改目录输出
+    addCategory(row, column, cellValue) {
+      return this.teacherTypes[cellValue - 1]
     },
 
     //格式化次数
@@ -340,10 +374,12 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.tableData.splice(index, 1)
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
+        this.$api.deleteTeacher(row.id, res => {
+          this.tableData.splice(index, 1)
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
         })
       }).catch(() => {
         this.$message({

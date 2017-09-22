@@ -77,7 +77,8 @@ export default {
             })
             this.$router.push('/')
           })
-          this.$router.push('/')
+          // sessionStorage.username = this.loginInfo.username
+          // this.$router.push('/')
         } else {
           return false
         }
