@@ -83,7 +83,13 @@ export default {
       })
   },
 
-  //获取订单信息
+  /**
+   *  获取订单信息
+   * state: 0 ==> 未支付  ; state: 1 ==> 支付
+   * data: {limit, page, state}
+   * @param {*} data 
+   * @param {*} cb 
+   */
   getOrders(data, cb) {
     _v.$http.get(this.data.host + 'orders', {
       params: data,

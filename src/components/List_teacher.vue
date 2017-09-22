@@ -20,36 +20,35 @@
     <!-- 面包屑导航 -->
     <div class="breadcrumb">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+        <el-breadcrumb-item>教师管理</el-breadcrumb-item>
         <el-breadcrumb-item>教师用户</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <!-- /面包屑导航 -->
 
+    <div class="operation-top">
+      <div class="operation-btn">
+        <el-button type="primary" @click="newTeacher">新增老师</el-button>
+      </div>
+      <!-- <div class="operation-search" @keydown.enter="searchTeacher">
+        <el-input placeholder="请输入内容" v-model="search">
+          <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
+            <el-option label="ID" value="id"></el-option>
+            <el-option label="教师名称" value="name"></el-option>
+            <el-option label="教师工号" value="number"></el-option>
+          </el-select>
+          <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
+        </el-input>
+      </div> -->
+    </div>
+
     <!-- 表格内容 -->
     <div class="content-table">
-      <div class="operation-top">
-        <div class="operation-btn">
-          <el-button type="primary" @click="newTeacher">新增老师</el-button>
-        </div>
-        <div class="operation-search" @keydown.enter="searchTeacher">
-          <el-input placeholder="请输入内容" v-model="search">
-            <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
-              <el-option label="ID" value="id"></el-option>
-              <el-option label="教师名称" value="name"></el-option>
-              <el-option label="教师工号" value="number"></el-option>
-            </el-select>
-            <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
-          </el-input>
-        </div>
-      </div>
       <el-table :data="tableData" border :stripe="true">
         <el-table-column prop="id" label="ID" width="180"></el-table-column>
         <el-table-column prop="category" label="分类" width="250" :formatter="addCategory" align="center"></el-table-column>
         <el-table-column prop="name" label="姓名" min-width="250" align="center"></el-table-column>
         <el-table-column prop="number" label="工号" min-width="200" align="center"></el-table-column>
-        <el-table-column prop="times" label="点评次数" width="150" :formatter="addTimes" align="center"></el-table-column>
-        <el-table-column prop="money" label="赞助总费用" width="150" :formatter="addMoney" align="center"></el-table-column>
         <el-table-column label="操作" width="250" align="center">
           <template scope="scope">
             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -61,10 +60,10 @@
     <!-- /表格内容 -->
 
     <!-- 分页 -->
-    <div class="pages">
-      <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
-      </el-pagination>
-    </div>
+    <!-- <div class="pages">
+          <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
+          </el-pagination>
+        </div> -->
     <!-- /分页 -->
   </section>
 </template>
@@ -273,14 +272,14 @@ export default {
     },
 
     //格式化次数
-    addTimes(row, column, cellValue) {
-      return cellValue + ' 次'
-    },
+    // addTimes(row, column, cellValue) {
+    //   return cellValue + ' 次'
+    // },
 
     //格式化金额
-    addMoney(row, column, cellValue) {
-      return cellValue + ' 元'
-    },
+    // addMoney(row, column, cellValue) {
+    //   return cellValue + ' 元'
+    // },
 
     //教师编辑
     handleEdit(index, row) {
@@ -390,9 +389,9 @@ export default {
     },
 
     //页码跳转
-    handleCurrentChange(e) {
-      console.log(e, this.$api.sayHi())
-    },
+    // handleCurrentChange(e) {
+    //   console.log(e, this.$api.sayHi())
+    // },
 
 
   }

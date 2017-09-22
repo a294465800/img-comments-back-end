@@ -101,8 +101,8 @@ header::after {
   overflow-y: scroll;
   overflow-x: auto;
   padding: 20px 30px;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .breadcrumb {
@@ -116,7 +116,7 @@ header::after {
 
 .content-table {
   width: 100%;
-  flex: 1;
+  /* flex: 1; */
 }
 
 @media screen and (max-height: 680px) {
@@ -125,12 +125,12 @@ header::after {
     overflow-x: auto;
   }
 }
-
+/*
 .pages {
   height: 120px;
   text-align: right;
   margin-top: 20px;
-}
+} */
 </style>
 
 <template>
@@ -159,9 +159,9 @@ header::after {
           <i class="el-icon-menu"></i>首页</el-menu-item>
         <el-submenu index="/list">
           <template slot="title">
-            <i class="el-icon-message"></i>用户信息</template>
+            <i class="el-icon-message"></i>教师管理</template>
           <el-menu-item-group>
-            <el-menu-item index="/list/student">学生用户</el-menu-item>
+            <el-menu-item index="/list/student">教师资费</el-menu-item>
             <el-menu-item index="/list/teacher">老师用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
