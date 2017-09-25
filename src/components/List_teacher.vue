@@ -115,7 +115,7 @@ export default {
     },
 
     //同步分类
-    SyncTeacherTyep(event) {
+    SyncTeacherType(event) {
       const select = document.querySelector('#selectInput input')
       select.value = event.target.innerHTML.replace(/[<>\/span]/g, '')
     },
@@ -192,7 +192,7 @@ export default {
                   },
                   nativeOn: {
                     click: event => {
-                      this.SyncTeacherTyep(event)
+                      this.SyncTeacherType(event)
                     }
                   }
                 }),
@@ -204,7 +204,7 @@ export default {
                   },
                   nativeOn: {
                     click: event => {
-                      this.SyncTeacherTyep(event)
+                      this.SyncTeacherType(event)
                     }
                   }
                 }),
@@ -216,7 +216,7 @@ export default {
                   },
                   nativeOn: {
                     click: event => {
-                      this.SyncTeacherTyep(event)
+                      this.SyncTeacherType(event)
                     }
                   }
                 }),
@@ -228,7 +228,7 @@ export default {
                   },
                   nativeOn: {
                     click: event => {
-                      this.SyncTeacherTyep(event)
+                      this.SyncTeacherType(event)
                     }
                   }
                 }),

@@ -166,7 +166,7 @@ header::after {
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="/article">
-          <i class="el-icon-document"></i>文章</el-menu-item>
+          <i class="el-icon-document"></i>文章管理</el-menu-item>
       </el-menu>
       <p class="copy">2017 &copy;<br> Sennki All Rights Reserved</p>
     </nav>

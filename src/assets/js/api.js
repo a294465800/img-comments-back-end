@@ -117,5 +117,54 @@ export default {
     }).catch(error => {
       this.APIError(error)
     })
-  }
+  },
+
+  //获取文章图片
+  getArticle(cb) {
+    _v.$http.get(this.data.host + 'api/article', {
+      params: {
+        type: 1
+      },
+    }).then(res => {
+      if ('OK' === res.data.code) {
+        _v.$http.get(this.data.host + 'article', {
+          params: {
+            type: 2
+          },
+        }).then(rs => {
+          if ('OK' === rs.data.code) {
+            typeof cb === 'function' && cb([res.data.data, rs.data.data])
+          } else {
+            this.APIError(rs.data.message)
+          }
+        }).catch(error => {
+          this.APIError(error)
+        })
+      } else {
+        this.APIError(res.data.message)
+      }
+    }).catch(error => {
+      this.APIError(error)
+    })
+  },
+
+  //设置文章
+  setArticle(data, cb) {
+    _v.$http({
+      url: this.data.host + 'article',
+      method: 'POST',
+      data: _v.$qs.stringify(data)
+    }).then(res => {
+      if ('OK' === res.data.code) {
+        typeof cb === 'function' && cb(res)
+      } else {
+        this.APIError(res.data.message)
+      }
+    }).catch(error => {
+      this.APIError(error)
+    })
+  },
+
+  //图片上传
+  upload(data){}
 }

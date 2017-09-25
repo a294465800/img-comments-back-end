@@ -1,23 +1,23 @@
 <style scoped>
-  .jumbotron {
-    padding: 48px 60px;
-    background-color: #eee;
-    border-radius: 4px;
-  }
+.jumbotron {
+  padding: 48px 60px;
+  background-color: #eee;
+  border-radius: 4px;
+}
 
-  .jumbotron h1 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    line-height: 1.1;
-    font-size: 63px;
-  }
+.jumbotron h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  line-height: 1.1;
+  font-size: 63px;
+}
 
-  .jumbotron p {
-    font-size: 21px;
-    font-weight: 200;
-    margin: 0 0 10px;
-  }
+.jumbotron p {
+  font-size: 21px;
+  font-weight: 200;
+  margin: 0 0 10px;
+}
 </style>
 
 <template>
