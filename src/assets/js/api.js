@@ -121,13 +121,13 @@ export default {
 
   //获取文章图片
   getArticle(cb) {
-    _v.$http.get(this.data.host + 'api/article', {
+    _v.$http.get(this.data.host + 'api/v1/article', {
       params: {
         type: 1
       },
     }).then(res => {
       if ('OK' === res.data.code) {
-        _v.$http.get(this.data.host + 'article', {
+        _v.$http.get(this.data.host + 'api/v1/article', {
           params: {
             type: 2
           },
@@ -164,7 +164,4 @@ export default {
       this.APIError(error)
     })
   },
-
-  //图片上传
-  upload(data){}
 }

@@ -20,7 +20,7 @@
   font-size: 28px;
   color: #8c939d;
   width: 300px;
-  height: 300px;
+  min-height: 300px;
   line-height: 300px;
   text-align: center;
 }
@@ -28,7 +28,15 @@
 .avatar {
   width: 90%;
   min-height: 300px;
-  display: block;
+  border-radius: 0;
+  height: auto;
+}
+
+.submit-class {
+  margin-bottom: 60px;
+  margin-top: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 </style>
 
@@ -48,12 +56,12 @@
         <el-form-item label="名称">
           <el-input v-model="formImage.name"></el-input>
         </el-form-item>
-        <el-upload class="avatar-uploader" action="http://192.168.3.22:8099/upload" accept="image/jpg,image/jpeg,image/png" :show-file-list="false" :on-success="uploadSuccess" :before-upload="beforeUpload">
+        <el-upload class="avatar-uploader" action="http://192.168.3.22:8099/upload" with-credentials accept="image/jpg,image/jpeg,image/png" :show-file-list="false" :on-success="uploadSuccess" :before-upload="beforeUpload" :on-error="uploadError">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-form-item style="text-align: center;">
+          <el-button type="primary" @click="submitForm" class="submit-class" size="large">提交</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -68,27 +76,44 @@ export default {
       formImage: {
         name: this.$route.params.article.name,
         type: this.$route.params.article.type,
-        url: this.$route.params.article.url,
+        url: '',
       },
-      imageUrl: '',
+      imageUrl: this.$api.data.host + this.$route.params.article.url,
     }
   },
   created() {
-    console.log(this.$route.params)
+    // console.log(this.$route.params)
   },
 
   methods: {
+
+    //上传成功
     uploadSuccess(res, file) {
-      console.log(res, file)
+      this.formImage.url = res.base_url
       this.imageUrl = URL.createObjectURL(file.raw)
-      console.log(this.imageUrl)
     },
+
+    //上传之前检测
     beforeUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 2
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isLt2M
+    },
+
+    //上传出错
+    uploadError(err, file, fileList){
+      this.$message.error('上传失败')
+    },
+
+    //提交上传
+    submitForm(){
+      if(this.formImage.name && this.formImage.url){
+        this.$api.setArticle(this.formImage, (result) => {
+          this.$router.push('/article')
+        })
+      }
     }
   }
 }

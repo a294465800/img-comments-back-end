@@ -46,7 +46,7 @@
       <el-table :data="tableData" border :stripe="true">
         <el-table-column prop="id" label="ID" width="180"></el-table-column>
         <el-table-column prop="name" label="名称" align="center"></el-table-column>
-        <el-table-column prop="url" label="url" align="center"></el-table-column>
+        <el-table-column prop="url" label="图片链接" align="center"></el-table-column>
         <el-table-column label="操作" align="center">
           <template scope="scope">
             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -73,24 +73,14 @@ export default {
       total: 32,
       currentPage: 1,
 
-      tableData: [
-        {
-          id: 1,
-          name: '哈喽',
-          url: 'https://www.baidu.com',
-          type: 1,
-        },
-        {
-          id: 2,
-          name: '哈喽',
-          url: 'https://www.baidu.com',
-          type: 2,
-        }
-      ],
+      tableData: [],
     }
   },
 
   created() {
+    this.$api.getArticle(result => {
+      this.tableData = result
+    })
   },
 
   methods: {

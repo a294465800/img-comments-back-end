@@ -141,8 +141,8 @@ header::after {
       <div class="login-info">
         <el-dropdown trigger="click">
           <span class="avatar-wrap">
-            <img class="avatar" src="https://avatars0.githubusercontent.com/u/25625618?v=4&s=460" alt="头像">
-            <span class="nick-name">SHINING</span>
+            <img class="avatar" src="../assets/image/admin.jpg" alt="头像">
+            <span class="nick-name">管理员</span>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
