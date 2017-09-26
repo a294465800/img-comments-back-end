@@ -2,19 +2,13 @@ import Vue from 'vue'
 const _v = Vue.prototype
 export default {
   data: {
-    host: 'http://192.168.3.22:8099/',
+    host: 'http://121.196.214.115:8080/',
   },
 
   //出错提示函数
   APIError(error) {
     _v.$alert(error, '出错啦', {
       confirmButtonText: '确定',
-      // callback: action => {
-      //   _v.$message({
-      //     type: 'info',
-      //     message: error
-      //   })
-      // }
     })
   },
 
