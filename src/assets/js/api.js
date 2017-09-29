@@ -2,12 +2,12 @@ import Vue from 'vue'
 const _v = Vue.prototype
 export default {
   data: {
-    host: 'http://121.196.214.115:8080/',
+    // host: 'http://121.196.214.115:8080/',
+    host: 'http://192.168.3.22:8099/',
   },
 
   //出错提示函数
   APIError(error) {
-    console.log(error)
     _v.$alert(error.data.message, '出错啦', {
       confirmButtonText: '确定',
     })
@@ -16,19 +16,16 @@ export default {
 
   //登录 api
   login(data, cb) {
-    _v.$http({
-      url: this.data.host + 'login',
-      method: 'POST',
-      data: _v.$qs.stringify(data)
-    }).then(res => {
-      if ('OK' === res.data.code) {
-        typeof cb === 'function' && cb(res)
-      } else {
-        this.APIError(res.data.message)
-      }
-    }).catch(error => {
-      this.APIError(error)
-    })
+    _v.$http.post(this.data.host + 'login', _v.$qs.stringify(data))
+      .then(res => {
+        if ('OK' === res.data.code) {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.APIError(res.data.message)
+        }
+      }).catch(error => {
+        this.APIError(error.response)
+      })
   },
 
   //获取老师信息
@@ -42,25 +39,23 @@ export default {
         this.APIError(res.data.message)
       }
     }).catch(error => {
-      this.APIError(error)
+      this.APIError(error.response)
     })
   },
 
   //新增老师信息
   addTeacher(data, cb) {
-    _v.$http({
-      url: this.data.host + 'teacher',
-      method: 'POST',
-      data: _v.$qs.stringify(data)
-    }).then(res => {
-      if ('OK' === res.data.code) {
-        typeof cb === 'function' && cb(res)
-      } else {
-        this.APIError(res.data.message)
-      }
-    }).catch(error => {
-      this.APIError(error)
-    })
+    _v.$http.post(this.data.host + 'teacher', _v.$qs.stringify(data))
+      .then(res => {
+        if ('OK' === res.data.code) {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.APIError(res.data.message)
+        }
+      })
+      .catch(error => {
+        this.APIError(error.response)
+      })
   },
 
   //删除教师
@@ -74,7 +69,7 @@ export default {
         }
       })
       .catch(error => {
-        this.APIError(error)
+        this.APIError(error.response)
       })
   },
 
@@ -95,7 +90,7 @@ export default {
         this.APIError(res.data.message)
       }
     }).catch(error => {
-      this.APIError(error)
+      this.APIError(error.response)
     })
   },
 
@@ -110,7 +105,7 @@ export default {
         this.APIError(res.data.message)
       }
     }).catch(error => {
-      this.APIError(error)
+      this.APIError(error.response)
     })
   },
 
@@ -133,13 +128,13 @@ export default {
             this.APIError(rs.data.message)
           }
         }).catch(error => {
-          this.APIError(error)
+          this.APIError(error.response)
         })
       } else {
         this.APIError(res.data.message)
       }
     }).catch(error => {
-      this.APIError(error)
+      this.APIError(error.response)
     })
   },
 
@@ -156,7 +151,7 @@ export default {
         this.APIError(res.data.message)
       }
     }).catch(error => {
-      this.APIError(error)
+      this.APIError(error.response)
     })
   },
 }

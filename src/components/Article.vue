@@ -26,19 +26,19 @@
     <!-- /面包屑导航 -->
 
     <!-- <div class="operation-top">
-        <div class="operation-btn">
-          <el-button type="primary" @click="newTeacher">新增老师</el-button>
-        </div> -->
+          <div class="operation-btn">
+            <el-button type="primary" @click="newTeacher">新增老师</el-button>
+          </div> -->
     <!-- <div class="operation-search" @keydown.enter="searchTeacher">
-          <el-input placeholder="请输入内容" v-model="search">
-            <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
-              <el-option label="ID" value="id"></el-option>
-              <el-option label="教师名称" value="name"></el-option>
-              <el-option label="教师工号" value="number"></el-option>
-            </el-select>
-            <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
-          </el-input>
-        </div> -->
+            <el-input placeholder="请输入内容" v-model="search">
+              <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
+                <el-option label="ID" value="id"></el-option>
+                <el-option label="教师名称" value="name"></el-option>
+                <el-option label="教师工号" value="number"></el-option>
+              </el-select>
+              <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
+            </el-input>
+          </div> -->
     <!-- </div> -->
 
     <!-- 表格内容 -->
@@ -58,9 +58,9 @@
 
     <!-- 分页 -->
     <!-- <div class="pages">
-            <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
-            </el-pagination>
-          </div> -->
+              <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
+              </el-pagination>
+            </div> -->
     <!-- /分页 -->
   </section>
 </template>
@@ -73,7 +73,15 @@ export default {
       total: 32,
       currentPage: 1,
 
-      tableData: [],
+      tableData: [{
+        id: 1,
+        name: '第一张图片',
+        url: ''
+      }, {
+        id: 2,
+        name: '第二张图片',
+        url: ''
+      }],
     }
   },
 

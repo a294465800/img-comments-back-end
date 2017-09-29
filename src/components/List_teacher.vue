@@ -124,7 +124,6 @@ export default {
     newTeacher() {
       const self = this
       const h = this.$createElement
-      console.log(h)
       this.$msgbox({
         title: '新增教师（注：工号无法二次修改！）',
         message: h('el-form',
@@ -250,6 +249,7 @@ export default {
             type: 'success',
             message: '新增成功！'
           })
+          window.location.reload()
         })
       }).catch(cancel => {
         this.$message({
