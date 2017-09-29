@@ -7,7 +7,8 @@ export default {
 
   //出错提示函数
   APIError(error) {
-    _v.$alert(JSON.parse(error).data.message, '出错啦', {
+    console.log(error)
+    _v.$alert(error.data.message, '出错啦', {
       confirmButtonText: '确定',
     })
   },
