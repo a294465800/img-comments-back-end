@@ -51,7 +51,7 @@
         <el-table-column prop="number" label="工号" align="center"></el-table-column>
         <el-table-column label="操作" align="center">
           <template scope="scope">
-            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <!-- <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
             <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -275,89 +275,89 @@ export default {
     // },
 
     //教师编辑
-    handleEdit(index, row) {
-      this.newTeacherInfo.name = row.name
-      this.newTeacherInfo.number = row.number
-      const h = this.$createElement
-      this.$msgbox({
-        title: '修改教师',
-        message: h('el-form',
-          {
-            props: {
-              'label-position': "top",
-              'label-width': "80px"
-            }
-          }, [
-            h('el-form-item',
-              {
-                props: {
-                  label: '教师名称'
-                }
-              }, [
-                h('el-input',
-                  {
-                    props: {
-                      placeholder: '请输入教师名称',
-                      value: row.name,
-                    },
-                    on: {
-                      input: value => {
-                        this.newTeacherInfo.name = value
-                      }
-                    }
-                  })
-              ]),
-            h('el-form-item',
-              {
-                props: {
-                  label: '工号'
-                }
-              }, [
-                h('el-input',
-                  {
-                    props: {
-                      placeholder: '请输入工号',
-                      value: row.number,
-                    },
-                    on: {
-                      input: value => {
-                        this.newTeacherInfo.number = value
-                      }
-                    }
-                  })
-              ]),
-          ]),
-        showCancelButton: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        beforeClose: (action, instance, done) => {
-          if (action === 'confirm') {
-            if (this.checkTeacherInfo()) {
-              done()
-            } else {
-              this.$message({
-                type: 'error',
-                message: '不能留空！'
-              })
-            }
-          } else {
-            done()
-          }
-        }
-      }).then(action => {
-        this.tableData[index].name = this.newTeacherInfo.name
-        this.tableData[index].number = this.newTeacherInfo.number
-        this.$message({
-          type: 'success',
-          message: '修改成功！'
-        })
-      }).catch(cancel => {
-        this.$message({
-          type: 'info',
-          message: '取消了操作'
-        })
-      })
-    },
+    // handleEdit(index, row) {
+    //   this.newTeacherInfo.name = row.name
+    //   this.newTeacherInfo.number = row.number
+    //   const h = this.$createElement
+    //   this.$msgbox({
+    //     title: '修改教师',
+    //     message: h('el-form',
+    //       {
+    //         props: {
+    //           'label-position': "top",
+    //           'label-width': "80px"
+    //         }
+    //       }, [
+    //         h('el-form-item',
+    //           {
+    //             props: {
+    //               label: '教师名称'
+    //             }
+    //           }, [
+    //             h('el-input',
+    //               {
+    //                 props: {
+    //                   placeholder: '请输入教师名称',
+    //                   value: row.name,
+    //                 },
+    //                 on: {
+    //                   input: value => {
+    //                     this.newTeacherInfo.name = value
+    //                   }
+    //                 }
+    //               })
+    //           ]),
+    //         h('el-form-item',
+    //           {
+    //             props: {
+    //               label: '工号'
+    //             }
+    //           }, [
+    //             h('el-input',
+    //               {
+    //                 props: {
+    //                   placeholder: '请输入工号',
+    //                   value: row.number,
+    //                 },
+    //                 on: {
+    //                   input: value => {
+    //                     this.newTeacherInfo.number = value
+    //                   }
+    //                 }
+    //               })
+    //           ]),
+    //       ]),
+    //     showCancelButton: true,
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     beforeClose: (action, instance, done) => {
+    //       if (action === 'confirm') {
+    //         if (this.checkTeacherInfo()) {
+    //           done()
+    //         } else {
+    //           this.$message({
+    //             type: 'error',
+    //             message: '不能留空！'
+    //           })
+    //         }
+    //       } else {
+    //         done()
+    //       }
+    //     }
+    //   }).then(action => {
+    //     this.tableData[index].name = this.newTeacherInfo.name
+    //     this.tableData[index].number = this.newTeacherInfo.number
+    //     this.$message({
+    //       type: 'success',
+    //       message: '修改成功！'
+    //     })
+    //   }).catch(cancel => {
+    //     this.$message({
+    //       type: 'info',
+    //       message: '取消了操作'
+    //     })
+    //   })
+    // },
 
     //教师删除
     handleDelete(index, row) {

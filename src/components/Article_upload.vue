@@ -82,7 +82,7 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.params.article.url , 1)
+    // console.log(this.$route.params.article.url , 1)
   },
 
   methods: {
