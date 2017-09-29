@@ -45,11 +45,11 @@
     <!-- 表格内容 -->
     <div class="content-table">
       <el-table :data="tableData" border :stripe="true">
-        <el-table-column prop="id" label="ID" width="180"></el-table-column>
-        <el-table-column prop="category" label="分类" width="250" :formatter="addCategory" align="center"></el-table-column>
-        <el-table-column prop="name" label="姓名" min-width="250" align="center"></el-table-column>
-        <el-table-column prop="number" label="工号" min-width="200" align="center"></el-table-column>
-        <el-table-column label="操作" width="250" align="center">
+        <el-table-column prop="id" label="ID"></el-table-column>
+        <el-table-column prop="category" label="分类" :formatter="addCategory" align="center"></el-table-column>
+        <el-table-column prop="name" label="姓名" align="center"></el-table-column>
+        <el-table-column prop="number" label="工号" align="center"></el-table-column>
+        <el-table-column label="操作" align="center">
           <template scope="scope">
             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
             <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>

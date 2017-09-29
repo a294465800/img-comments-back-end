@@ -78,7 +78,7 @@ export default {
         type: this.$route.params.article.type,
         url: '',
       },
-      imageUrl: this.$api.data.host + this.$route.params.article.url?this.$api.data.host + this.$route.params.article.url : '',
+      imageUrl: this.$route.params.article.url?this.$api.data.host + this.$route.params.article.url : '',
     }
   },
   created() {
