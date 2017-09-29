@@ -56,7 +56,7 @@
         <el-form-item label="名称">
           <el-input v-model="formImage.name"></el-input>
         </el-form-item>
-        <el-upload class="avatar-uploader" action="http://192.168.3.22:8099/upload" with-credentials accept="image/jpg,image/jpeg,image/png" :show-file-list="false" :on-success="uploadSuccess" :before-upload="beforeUpload" :on-error="uploadError">
+        <el-upload class="avatar-uploader" action="http://121.196.214.115:8080/upload" with-credentials accept="image/jpg,image/jpeg,image/png" :show-file-list="false" :on-success="uploadSuccess" :before-upload="beforeUpload" :on-error="uploadError">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
@@ -78,7 +78,7 @@ export default {
         type: this.$route.params.article.type,
         url: '',
       },
-      imageUrl: this.$api.data.host + this.$route.params.article.url,
+      imageUrl: this.$api.data.host + this.$route.params.article.url?this.$api.data.host + this.$route.params.article.url : '',
     }
   },
   created() {
