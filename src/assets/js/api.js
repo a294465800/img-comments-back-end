@@ -154,4 +154,36 @@ export default {
       this.APIError(error.response)
     })
   },
+
+  //获取点评金额
+  getCommitMoney(data, cb){
+    _v.$http.get(this.data.host + 'config', {
+      params: data
+    })
+    .then(res => {
+      if ('OK' === res.data.code) {
+        typeof cb === 'function' && cb(res)
+      } else {
+        this.APIError(res.data.message)
+      }
+    })
+    .catch(error => {
+      this.APIError(error.response)      
+    })
+  },
+
+  //修改点评金额
+  changeCommitMoney(data, cb){
+    _v.$http.post(this.data.host + 'config', _v.$qs.stringify(data))
+    .then(res => {
+      if ('OK' === res.data.code) {
+        typeof cb === 'function' && cb(res)
+      } else {
+        this.APIError(res.data.message)
+      }
+    })
+    .catch(error => {
+      this.APIError(error.response)
+    })
+  }
 }

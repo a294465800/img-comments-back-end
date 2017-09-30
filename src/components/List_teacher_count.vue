@@ -45,20 +45,20 @@
         <el-table-column prop="number" label="工号" align="center"></el-table-column>
         <el-table-column prop="count" label="资费" :formatter="addMoney" align="center"></el-table-column>
         <!-- <el-table-column label="操作" width="180" align="center">
-                    <template scope="scope">
-                      <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                      <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                    </template>
-                  </el-table-column> -->
+                          <template scope="scope">
+                            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                            <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                          </template>
+                        </el-table-column> -->
       </el-table>
     </div>
     <!-- /表格内容 -->
 
     <!-- 分页 -->
     <!-- <div class="pages">
-                  <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
-                  </el-pagination>
-                </div> -->
+                        <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
+                        </el-pagination>
+                      </div> -->
     <!-- /分页 -->
   </section>
 </template>
@@ -73,7 +73,7 @@ export default {
       tableData: [],
       isActive: true,
       isActiveText: '修改',
-      commitMoney: 10,
+      commitMoney: 1,
     }
   },
 
@@ -81,6 +81,9 @@ export default {
     // this.$api.getOrders({ limit: 10, state: 1, page: 1 })
     this.$api.getTeacherCount('', res => {
       this.tableData = res.data.data
+    })
+    this.$api.getCommitMoney('', res => {
+      this.commitMoney = res.data.data.price
     })
   },
 
@@ -105,12 +108,19 @@ export default {
     },
 
     //修改回扣金钱
-    changeCommitMoney(){
+    changeCommitMoney() {
       this.isActive = !this.isActive
-      if(this.isActive){
+      if (this.isActive) {
         this.isActiveText = '修改'
-      }else {
-        this.isActiveText = '确定'
+      } else {
+        this.$api.changeCommitMoney({ price: this.commitMoney }, (result) => {
+          this.isActiveText = '确定'
+          this.$message({
+            type: 'success',
+            showClose: true,
+            message: '修改成功',
+          })
+        })
       }
     },
 
