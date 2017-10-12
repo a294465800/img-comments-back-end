@@ -179,7 +179,7 @@ export default {
                 },
                 on: {
                   input: value => {
-                    this.newTeacherInfo.category = value + 1
+                    this.newTeacherInfo.category = value
                   }
                 }
               }, [
