@@ -107,8 +107,8 @@ export default {
     },
 
     //页码跳转
-    handleCurrentChange() {
-      this.$api.getAllPictures({ type: 3, page: this.currentPage }, (res) => {
+    handleCurrentChange(currentPage) {
+      this.$api.getAllPictures({ type: 3, page: currentPage }, (res) => {
         this.tableData = res.data.data
       })
     },
