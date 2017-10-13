@@ -1,5 +1,4 @@
 <style scoped>
-
 .operation-search {
   float: right;
   width: 450px;
@@ -93,6 +92,7 @@ export default {
       }).then(() => {
         this.$api.deletePicture(row.id, res => {
           this.tableData.splice(index, 1)
+          this.total--
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -107,10 +107,10 @@ export default {
     },
 
     //页码跳转
-    handleCurrentChange(e) {
-      this.$api.getAllPictures({ type: 3, page: this.currentPage++ }, (res) => {
-      this.tableData = res.data.data
-    })
+    handleCurrentChange() {
+      this.$api.getAllPictures({ type: 3, page: this.currentPage }, (res) => {
+        this.tableData = res.data.data
+      })
     },
 
 
