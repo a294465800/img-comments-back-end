@@ -31,15 +31,15 @@
         <el-button type="primary" @click="newTeacher">新增老师</el-button>
       </div>
       <!-- <div class="operation-search" @keydown.enter="searchTeacher">
-                <el-input placeholder="请输入内容" v-model="search">
-                  <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
-                    <el-option label="ID" value="id"></el-option>
-                    <el-option label="教师名称" value="name"></el-option>
-                    <el-option label="教师工号" value="number"></el-option>
-                  </el-select>
-                  <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
-                </el-input>
-              </div> -->
+                  <el-input placeholder="请输入内容" v-model="search">
+                    <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
+                      <el-option label="ID" value="id"></el-option>
+                      <el-option label="教师名称" value="name"></el-option>
+                      <el-option label="教师工号" value="number"></el-option>
+                    </el-select>
+                    <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
+                  </el-input>
+                </div> -->
     </div>
 
     <!-- 表格内容 -->
@@ -49,6 +49,7 @@
         <el-table-column prop="category" label="分类" :formatter="addCategory" align="center"></el-table-column>
         <el-table-column prop="name" label="姓名" align="center"></el-table-column>
         <el-table-column prop="number" label="工号" align="center"></el-table-column>
+        <el-table-column prop="description" label="简介" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column label="操作" align="center">
           <template scope="scope">
             <!-- <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
@@ -61,9 +62,9 @@
 
     <!-- 分页 -->
     <!-- <div class="pages">
-                  <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
-                  </el-pagination>
-                </div> -->
+                    <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
+                    </el-pagination>
+                  </div> -->
     <!-- /分页 -->
   </section>
 </template>
@@ -84,6 +85,7 @@ export default {
       newTeacherInfo: {
         name: '',
         number: '',
+        description: ''
       },
 
       total: 32,
@@ -231,7 +233,29 @@ export default {
                     }
                   }
                 }),
-              ])
+              ]),
+            h('el-form-item',
+              {
+                domProps: {
+                  style: 'margin-top: 20px',
+                },
+                props: {
+                  label: '简介'
+                }
+              }, [
+                h('el-input',
+                  {
+                    props: {
+                      placeholder: '请输入简介',
+                      type: 'textarea'
+                    },
+                    on: {
+                      input: value => {
+                        this.newTeacherInfo.description = value
+                      }
+                    }
+                  })
+              ]),
           ]),
         showCancelButton: true,
         confirmButtonText: '确定',

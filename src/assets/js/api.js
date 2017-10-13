@@ -2,8 +2,8 @@ import Vue from 'vue'
 const _v = Vue.prototype
 export default {
   data: {
-    host: 'https://www.arch-seu.com/',
-    // host: 'http://192.168.3.22:8099/',
+    // host: 'https://www.arch-seu.com/',
+    host: 'http://192.168.3.22:8099/',
   },
 
   //出错提示函数
