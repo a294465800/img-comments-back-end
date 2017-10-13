@@ -7,6 +7,7 @@ import List_teacher_count from '@/components/List_teacher_count'
 import List_teacher from '@/components/List_teacher'
 import Article from '@/components/Article'
 import Article_upload from '@/components/Article_upload'
+import List_picture from '@/components/List_picture'
 
 Vue.use(Router)
 
@@ -38,6 +39,10 @@ export default new Router({
       path: 'article/upload',
       name: 'Article_upload',
       component: Article_upload,
+    }, {
+      path: 'pictures',
+      name: 'List_picture',
+      component: List_picture
     }]
   }]
 })

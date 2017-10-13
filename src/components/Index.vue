@@ -9,6 +9,7 @@
 
 
 
+
 /* header 样式 */
 
 header {
@@ -59,6 +60,7 @@ header::after {
 
 
 
+
 /* 左侧导航 */
 
 .nav-bar {
@@ -83,6 +85,7 @@ header::after {
 .nav-bar ul {
   height: 100%;
 }
+
 
 
 
@@ -125,6 +128,8 @@ header::after {
     overflow-x: auto;
   }
 }
+
+
 /*
 .pages {
   height: 120px;
@@ -165,8 +170,12 @@ header::after {
             <el-menu-item index="/list/teacher">老师用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
+        <el-menu-item index="/pictures">
+          <i class="el-icon-picture"></i>所有图片
+        </el-menu-item>
         <el-menu-item index="/article">
-          <i class="el-icon-document"></i>文章管理</el-menu-item>
+          <i class="el-icon-document"></i>文章管理
+        </el-menu-item>
       </el-menu>
       <p class="copy">2017 &copy;<br> Sennki All Rights Reserved</p>
     </nav>
@@ -192,7 +201,7 @@ export default {
   methods: {
 
     //退出
-    logout(){
+    logout() {
       sessionStorage.clear()
       this.$router.push('/login')
     }

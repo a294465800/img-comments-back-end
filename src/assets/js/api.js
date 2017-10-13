@@ -2,8 +2,8 @@ import Vue from 'vue'
 const _v = Vue.prototype
 export default {
   data: {
-    // host: 'https://www.arch-seu.com/',
-    host: 'http://192.168.3.22:8099/',
+    host: 'https://www.arch-seu.com/',
+    // host: 'http://192.168.3.22:8099/',
   },
 
   //出错提示函数
@@ -184,6 +184,61 @@ export default {
     })
     .catch(error => {
       this.APIError(error.response)
+    })
+  },
+
+  /**
+   * 获取图片页数
+   */
+  getPicturesCount(data, cb){
+    _v.$http.get(this.data.host + 'count/pictures', {
+      params: data
+    })
+    .then(res => {
+      if ('OK' === res.data.code) {
+        typeof cb === 'function' && cb(res)
+      } else {
+        this.APIError(res.data.message)
+      }
+    })
+    .catch(error => {
+      this.APIError(error.response)      
+    })
+  },
+  
+  /**
+   * 获取所有图片
+   */
+  getAllPictures(data, cb){
+    _v.$http.get(this.data.host + 'pictures', {
+      params: data
+    })
+    .then(res => {
+      if ('OK' === res.data.code) {
+        typeof cb === 'function' && cb(res)
+      } else {
+        this.APIError(res.data.message)
+      }
+    })
+    .catch(error => {
+      this.APIError(error.response)      
+    })
+  },
+
+  /**
+   * 删除图片
+   */
+  deletePicture(id, cb){
+    _v.$http.get(this.data.host + 'picture/delete/' + id)
+    .then(res => {
+      if ('OK' === res.data.code) {
+        typeof cb === 'function' && cb(res)
+      } else {
+        this.APIError(res.data.message)
+      }
+    })
+    .catch(error => {
+      this.APIError(error.response)      
     })
   }
 }
