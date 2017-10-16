@@ -108,7 +108,7 @@ export default {
 
       //图片预览数据
       isPre: false,
-      preUrl: 'http://img02.tooopen.com/images/20151225/tooopen_sy_152706581529.jpg',
+      preUrl: '',
 
       //教师类型
       teacherTypes: ['建筑学', '城规', '美术学', '景观'],
@@ -170,7 +170,7 @@ export default {
     //图片预览
     preImg(url) {
       this.preImg = url,
-        this.isPre = true
+      this.isPre = true
     },
 
     //关闭预览
