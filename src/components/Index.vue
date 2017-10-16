@@ -167,7 +167,7 @@ header::after {
             <i class="el-icon-message"></i>教师管理</template>
           <el-menu-item-group>
             <el-menu-item index="/list/student">教师资费</el-menu-item>
-            <el-menu-item index="/list/teacher">老师用户</el-menu-item>
+            <el-menu-item index="/list/teacher">教师用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="/pictures">

@@ -28,18 +28,18 @@
 
     <div class="operation-top">
       <div class="operation-btn">
-        <el-button type="primary" @click="newTeacher">新增老师</el-button>
+        <el-button type="primary" @click="newTeacher">新增教师</el-button>
       </div>
       <!-- <div class="operation-search" @keydown.enter="searchTeacher">
-                  <el-input placeholder="请输入内容" v-model="search">
-                    <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
-                      <el-option label="ID" value="id"></el-option>
-                      <el-option label="教师名称" value="name"></el-option>
-                      <el-option label="教师工号" value="number"></el-option>
-                    </el-select>
-                    <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
-                  </el-input>
-                </div> -->
+                            <el-input placeholder="请输入内容" v-model="search">
+                              <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 110px;">
+                                <el-option label="ID" value="id"></el-option>
+                                <el-option label="教师名称" value="name"></el-option>
+                                <el-option label="教师工号" value="number"></el-option>
+                              </el-select>
+                              <el-button slot="append" icon="search" @click="searchTeacher"></el-button>
+                            </el-input>
+                          </div> -->
     </div>
 
     <!-- 表格内容 -->
@@ -62,9 +62,9 @@
 
     <!-- 分页 -->
     <!-- <div class="pages">
-                    <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
-                    </el-pagination>
-                  </div> -->
+                              <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
+                              </el-pagination>
+                            </div> -->
     <!-- /分页 -->
   </section>
 </template>
@@ -262,7 +262,24 @@ export default {
         cancelButtonText: '取消',
         beforeClose: (action, instance, done) => {
           if (action === 'confirm') {
-            done()
+            if (this.newTeacherInfo.name.length > 10 || (/\d/).test(this.newTeacherInfo.name)) {
+              this.$message({
+                type: 'warning',
+                message: '名称不能为数字且10字以内'
+              })
+            } else if (!(/^[0-9]*$/).test(this.newTeacherInfo.number)) {
+              this.$message({
+                type: 'warning',
+                message: '工号只能为数字'
+              })
+            } else if (this.newTeacherInfo.description.length > 50) {
+              this.$message({
+                type: 'warning',
+                message: '教师简介请控制在50字以内'
+              })
+            } else {
+              done()
+            }
           } else {
             done()
           }
