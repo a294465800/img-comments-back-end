@@ -40,7 +40,6 @@
     <!-- 表格内容 -->
     <div class="content-table">
       <el-table :data="tableData" border :stripe="true">
-        <el-table-column prop="teacher_id" label="ID"></el-table-column>
         <el-table-column prop="teacher" label="姓名" align="center"></el-table-column>
         <el-table-column prop="number" label="工号" align="center"></el-table-column>
         <el-table-column prop="count" label="资费" :formatter="addMoney" align="center"></el-table-column>

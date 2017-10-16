@@ -58,9 +58,8 @@
     <!-- 表格内容 -->
     <div class="content-table">
       <el-table :data="tableData" border :stripe="true">
-        <el-table-column prop="id" label="ID"></el-table-column>
         <el-table-column prop="category" label="分类" :formatter="addCategory" align="center"></el-table-column>
-        <el-table-column prop="user_id" label="用户ID" align="center"></el-table-column>
+        <!-- <el-table-column prop="user_id" label="用户ID" align="center"></el-table-column> -->
         <el-table-column label="图片预览" align="center">
           <template scope="scope">
             <img :src="'https://www.arch-seu.com/' + scope.row.url" alt="点击预览" title="点击预览" style="height: 40px; text-align: center; vertical-align: middle; cursor: pointer;" @click="preImgFnc(scope.row.url)">

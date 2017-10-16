@@ -44,7 +44,6 @@
     <!-- 表格内容 -->
     <div class="content-table">
       <el-table :data="tableData" border :stripe="true">
-        <el-table-column prop="id" label="ID" width="180"></el-table-column>
         <el-table-column prop="name" label="名称" align="center"></el-table-column>
         <el-table-column prop="url" label="图片链接" align="center"></el-table-column>
         <el-table-column label="操作" align="center">

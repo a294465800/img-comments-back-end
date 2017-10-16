@@ -45,7 +45,6 @@
     <!-- 表格内容 -->
     <div class="content-table">
       <el-table :data="tableData" border :stripe="true">
-        <el-table-column prop="id" label="ID"></el-table-column>
         <el-table-column prop="category" label="分类" :formatter="addCategory" align="center"></el-table-column>
         <el-table-column prop="name" label="姓名" align="center"></el-table-column>
         <el-table-column prop="number" label="工号" align="center"></el-table-column>
