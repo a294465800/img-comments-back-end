@@ -8,6 +8,41 @@
   text-align: right;
   margin-top: 20px;
 }
+
+.pre-img-wrap {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.sub-wrap {
+  width: 70%;
+  text-align: center;
+}
+
+.sub-wrap>img {
+  max-width: 100%;
+}
+
+.sub-wrap>span {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.pre-img-wrap.active {
+  display: flex;
+}
 </style>
 
 <template>
@@ -26,12 +61,18 @@
         <el-table-column prop="id" label="ID"></el-table-column>
         <el-table-column prop="category" label="分类" :formatter="addCategory" align="center"></el-table-column>
         <el-table-column prop="user_id" label="用户ID" align="center"></el-table-column>
+        <el-table-column label="图片预览" align="center">
+          <template scope="scope">
+            <img :src="'https://www.arch-seu.com/' + scope.row.url" alt="点击预览" style="height: 100%;" @click.native="preImg(scope.row.url)">
+          </template>
+        </el-table-column>
         <el-table-column label="打赏费用" align="center">
           <template scope="scope">{{scope.row.price}} 元</template>
         </el-table-column>
         <el-table-column label="状态" align="center">
-          <template scope="scope">{{scope.row.stete == 1 ?'未点评':'已点评'}} </template>
+          <template scope="scope">{{scope.row.state == 1 ?'未点评':'已点评'}} </template>
         </el-table-column>
+        <el-table-column prop="created_at" label="提交时间" show-overflow-tooltip align="center"></el-table-column>
         <el-table-column label="操作" align="center">
           <template scope="scope">
             <!-- <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
@@ -48,6 +89,15 @@
       </el-pagination>
     </div>
     <!-- /分页 -->
+
+    <!-- 图片预览 -->
+    <div class="pre-img-wrap" :class="{'active': isPre}">
+      <div class="sub-wrap">
+        <img :src="preUrl" alt="图片">
+        <span @click="closePreImg">关闭</span>
+      </div>
+    </div>
+    <!-- /图片预览 -->
   </section>
 </template>
 
@@ -55,6 +105,10 @@
 export default {
   data() {
     return {
+
+      //图片预览数据
+      isPre: false,
+      preUrl: 'http://img02.tooopen.com/images/20151225/tooopen_sy_152706581529.jpg',
 
       //教师类型
       teacherTypes: ['建筑学', '城规', '美术学', '景观'],
@@ -113,7 +167,16 @@ export default {
       })
     },
 
+    //图片预览
+    preImg(url) {
+      this.preImg = url,
+        this.isPre = true
+    },
 
+    //关闭预览
+    closePreImg() {
+      this.isPre = false
+    },
   }
 }
 </script>
