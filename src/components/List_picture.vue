@@ -63,7 +63,7 @@
         <el-table-column prop="user_id" label="用户ID" align="center"></el-table-column>
         <el-table-column label="图片预览" align="center">
           <template scope="scope">
-            <img :src="'https://www.arch-seu.com/' + scope.row.url" alt="点击预览" title="点击预览" style="height: 40px; text-align: center; vertical-align: middle; cursor: pointer;" @click="preImg(scope.row.url)">
+            <img :src="'https://www.arch-seu.com/' + scope.row.url" alt="点击预览" title="点击预览" style="height: 40px; text-align: center; vertical-align: middle; cursor: pointer;" @click="preImgFnc(scope.row.url)">
           </template>
         </el-table-column>
         <el-table-column label="打赏费用" align="center">
@@ -93,7 +93,7 @@
     <!-- 图片预览 -->
     <div class="pre-img-wrap" :class="{'active': isPre}">
       <div class="sub-wrap">
-        <img :src="preUrl" alt="图片">
+        <img :src="preImg" alt="图片">
         <span @click="closePreImg">关闭</span>
       </div>
     </div>
@@ -108,7 +108,7 @@ export default {
 
       //图片预览数据
       isPre: false,
-      preUrl: '',
+      preImg: '',
 
       //教师类型
       teacherTypes: ['建筑学', '城规', '美术学', '景观'],
@@ -168,9 +168,9 @@ export default {
     },
 
     //图片预览
-    preImg(url) {
+    preImgFnc(url) {
       this.isPre = true
-      this.preImg = url
+      this.preImg = this.$api.data.host + url
     },
 
     //关闭预览
