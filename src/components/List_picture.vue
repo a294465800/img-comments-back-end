@@ -63,7 +63,7 @@
         <el-table-column prop="user_id" label="用户ID" align="center"></el-table-column>
         <el-table-column label="图片预览" align="center">
           <template scope="scope">
-            <img :src="'https://www.arch-seu.com/' + scope.row.url" alt="点击预览" style="height: 40px; vertical-align: middle;" @click.native="preImg(scope.row.url)">
+            <img :src="'https://www.arch-seu.com/' + scope.row.url" alt="点击预览" title="点击预览" style="height: 40px; text-align: center; vertical-align: middle; cursor: pointer;" @click="preImg(scope.row.url)">
           </template>
         </el-table-column>
         <el-table-column label="打赏费用" align="center">
@@ -169,7 +169,6 @@ export default {
 
     //图片预览
     preImg(url) {
-      console.log(111)
       this.isPre = true
       this.preImg = url
     },
