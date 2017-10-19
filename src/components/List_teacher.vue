@@ -104,7 +104,7 @@ export default {
         category: ""
       },
 
-      total: 100,
+      total: 0,
       currentPage: 1,
 
       tableData: []
