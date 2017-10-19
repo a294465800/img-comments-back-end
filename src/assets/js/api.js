@@ -44,7 +44,7 @@ export default {
   },
 
   //获取教师总数
-  getTeacherCount() {
+  getTeacherCountPage(data, cb) {
     _v.$http.get(this.data.host + 'count/teachers').then(res => {
       if ('OK' === res.data.code) {
         typeof cb === 'function' && cb(res)

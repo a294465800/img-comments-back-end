@@ -112,7 +112,7 @@ export default {
   },
 
   created() {
-    this.$api.getTeacherCount("", res => {
+    this.$api.getTeacherCountPage("", res => {
       this.total = res.data.data;
     });
     this.$api.getTeachers({ page: 1 }, res => {

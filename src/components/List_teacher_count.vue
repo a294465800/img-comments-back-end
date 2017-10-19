@@ -14,6 +14,18 @@
   display: flex;
   justify-content: space-between;
 }
+
+.content-wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-table {
+  min-height: 250px;
+  flex: 1;
+  overflow: auto;
+}
 </style>
 
 <template>
@@ -53,11 +65,11 @@
     </div>
     <!-- /表格内容 -->
 
-    <!-- 分页 -->
+        <!-- 分页 -->
     <!-- <div class="pages">
-                            <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
-                            </el-pagination>
-                          </div> -->
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
+      </el-pagination>
+    </div> -->
     <!-- /分页 -->
   </section>
 </template>
@@ -66,31 +78,30 @@
 export default {
   data() {
     return {
-      total: 32,
+      total: 0,
       currentPage: 1,
       currentMonth: new Date().toDateString(),
       tableData: [],
       isActive: true,
-      isActiveText: '修改',
-      commitMoney: 1,
-    }
+      isActiveText: "修改",
+      commitMoney: 1
+    };
   },
 
   created() {
     // this.$api.getOrders({ limit: 10, state: 1, page: 1 })
-    this.$api.getTeacherCount('', res => {
-      this.tableData = res.data.data
-    })
-    this.$api.getCommitMoney('', res => {
-      this.commitMoney = res.data.data.price
-    })
+    this.$api.getTeacherCount("", res => {
+      this.tableData = res.data.data;
+    });
+    this.$api.getCommitMoney("", res => {
+      this.commitMoney = res.data.data.price;
+    });
   },
 
   methods: {
-
     //格式化金额
     addMoney(row, column, cellValue) {
-      return cellValue + ' 元'
+      return cellValue + " 元";
     },
     handleEdit(index, row) {
       console.log(index, row);
@@ -101,32 +112,32 @@ export default {
 
     //月份选择触发
     selectMonth(month) {
-      this.$api.getTeacherCount({ time: month + '-01' }, res => {
-        this.tableData = res.data.data
-      })
+      this.$api.getTeacherCount({ time: month + "-01" }, res => {
+        this.tableData = res.data.data;
+      });
     },
 
     //修改回扣金钱
     changeCommitMoney() {
-      this.isActive = !this.isActive
+      this.isActive = !this.isActive;
       if (this.isActive) {
-        this.isActiveText = '修改'
-        this.$api.changeCommitMoney({ price: this.commitMoney }, (result) => {
+        this.isActiveText = "修改";
+        this.$api.changeCommitMoney({ price: this.commitMoney }, result => {
           this.$message({
-            type: 'success',
+            type: "success",
             showClose: true,
-            message: '修改成功',
-          })
-        })
+            message: "修改成功"
+          });
+        });
       } else {
-        this.isActiveText = '确定'
+        this.isActiveText = "确定";
       }
-    },
+    }
 
     // //页码跳转
     // handleCurrentChange(e) {
 
     // },
   }
-}
+};
 </script>
