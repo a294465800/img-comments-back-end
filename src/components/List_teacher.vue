@@ -97,27 +97,14 @@ export default {
       total: 32,
       currentPage: 1,
 
-      tableData: [
-        {
-          id: 1,
-          category: 1,
-          name: "三大打算",
-          description: "撒旦"
-        },
-        {
-          id: 2,
-          category: 2,
-          name: "三大打算",
-          description: "撒旦"
-        }
-      ]
+      tableData: []
     };
   },
 
   created() {
-    // this.$api.getTeachers("", res => {
-    //   this.tableData = res.data.data
-    // })
+    this.$api.getTeachers("", res => {
+      this.tableData = res.data.data;
+    });
   },
 
   methods: {
