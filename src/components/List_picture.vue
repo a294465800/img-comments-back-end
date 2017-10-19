@@ -12,7 +12,7 @@
 .pre-img-wrap {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: none;
   justify-content: center;
   align-items: center;
@@ -27,11 +27,11 @@
   text-align: center;
 }
 
-.sub-wrap>img {
+.sub-wrap > img {
   max-width: 100%;
 }
 
-.sub-wrap>span {
+.sub-wrap > span {
   position: absolute;
   top: 30px;
   right: 30px;
@@ -60,6 +60,11 @@
       <el-table :data="tableData" border :stripe="true">
         <el-table-column prop="category" label="分类" :formatter="addCategory" align="center"></el-table-column>
         <el-table-column prop="nickname" label="用户名称" align="center"></el-table-column>
+        <el-table-column prop="avatarUrl" label="用户头像" align="center">
+           <template scope="scope">
+            <img :src="'https://www.arch-seu.com/' + scope.row.avatarUrl" :alt="scope.row.nickname" :title="scope.row.nickname" style="height: 40px; text-align: center; vertical-align: middle; cursor: pointer;border-radius: 50%;">
+          </template>
+        </el-table-column>
         <el-table-column label="图片预览" align="center">
           <template scope="scope">
             <img :src="'https://www.arch-seu.com/' + scope.row.url" alt="点击预览" title="点击预览" style="height: 40px; text-align: center; vertical-align: middle; cursor: pointer;" @click="preImgFnc(scope.row.url)">
@@ -104,78 +109,78 @@
 export default {
   data() {
     return {
-
       //图片预览数据
       isPre: false,
-      preImg: '',
+      preImg: "",
 
       //教师类型
-      teacherTypes: ['建筑学', '城规', '美术学', '景观'],
+      teacherTypes: ["建筑学", "城规", "美术学", "景观"],
 
       currentPage: 1,
 
       tableData: [],
 
-      total: 0,
-    }
+      total: 0
+    };
   },
 
   created() {
-    this.$api.getPicturesCount('', res => {
-      this.total = res.data.data
-    })
-    this.$api.getAllPictures({ type: 3, page: 1 }, (res) => {
-      this.tableData = res.data.data
-    })
+    this.$api.getPicturesCount("", res => {
+      this.total = res.data.data;
+    });
+    this.$api.getAllPictures({ type: 3, page: 1 }, res => {
+      this.tableData = res.data.data;
+    });
   },
 
   methods: {
-
     //修改目录输出
     addCategory(row, column, cellValue) {
-      return this.teacherTypes[cellValue - 1]
+      return this.teacherTypes[cellValue - 1];
     },
 
     //教师删除
     handleDelete(index, row) {
-      this.$confirm('此操作将删除该学生图片, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$api.deletePicture(row.id, res => {
-          this.tableData.splice(index, 1)
-          this.total--
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
+      this.$confirm("此操作将删除该学生图片, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
+        .then(() => {
+          this.$api.deletePicture(row.id, res => {
+            this.tableData.splice(index, 1);
+            this.total--;
+            this.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
 
     //页码跳转
     handleCurrentChange(currentPage) {
-      this.$api.getAllPictures({ type: 3, page: currentPage }, (res) => {
-        this.tableData = res.data.data
-      })
+      this.$api.getAllPictures({ type: 3, page: currentPage }, res => {
+        this.tableData = res.data.data;
+      });
     },
 
     //图片预览
     preImgFnc(url) {
-      this.isPre = true
-      this.preImg = this.$api.data.host + url
+      this.isPre = true;
+      this.preImg = this.$api.data.host + url;
     },
 
     //关闭预览
     closePreImg() {
-      this.isPre = false
-    },
+      this.isPre = false;
+    }
   }
-}
+};
 </script>

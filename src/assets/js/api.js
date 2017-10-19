@@ -58,6 +58,21 @@ export default {
       })
   },
 
+  //编辑教师
+  editTeacher(data, id, cb) {
+    _v.$http.post(this.data.host + 'edit/teacher/' + id, _v.$qs.stringify(data))
+      .then(res => {
+        if ('OK' === res.data.code) {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.APIError(res.data.message)
+        }
+      })
+      .catch(error => {
+        this.APIError(error.response)
+      })
+  },
+
   //删除教师
   deleteTeacher(id, cb) {
     _v.$http.get(this.data.host + 'teacher/delete/' + id)
@@ -156,89 +171,89 @@ export default {
   },
 
   //获取点评金额
-  getCommitMoney(data, cb){
+  getCommitMoney(data, cb) {
     _v.$http.get(this.data.host + 'config', {
-      params: data
-    })
-    .then(res => {
-      if ('OK' === res.data.code) {
-        typeof cb === 'function' && cb(res)
-      } else {
-        this.APIError(res.data.message)
-      }
-    })
-    .catch(error => {
-      this.APIError(error.response)      
-    })
+        params: data
+      })
+      .then(res => {
+        if ('OK' === res.data.code) {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.APIError(res.data.message)
+        }
+      })
+      .catch(error => {
+        this.APIError(error.response)
+      })
   },
 
   //修改点评金额
-  changeCommitMoney(data, cb){
+  changeCommitMoney(data, cb) {
     _v.$http.post(this.data.host + 'config', _v.$qs.stringify(data))
-    .then(res => {
-      if ('OK' === res.data.code) {
-        typeof cb === 'function' && cb(res)
-      } else {
-        this.APIError(res.data.message)
-      }
-    })
-    .catch(error => {
-      this.APIError(error.response)
-    })
+      .then(res => {
+        if ('OK' === res.data.code) {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.APIError(res.data.message)
+        }
+      })
+      .catch(error => {
+        this.APIError(error.response)
+      })
   },
 
   /**
    * 获取图片页数
    */
-  getPicturesCount(data, cb){
+  getPicturesCount(data, cb) {
     _v.$http.get(this.data.host + 'count/pictures', {
-      params: data
-    })
-    .then(res => {
-      if ('OK' === res.data.code) {
-        typeof cb === 'function' && cb(res)
-      } else {
-        this.APIError(res.data.message)
-      }
-    })
-    .catch(error => {
-      this.APIError(error.response)      
-    })
+        params: data
+      })
+      .then(res => {
+        if ('OK' === res.data.code) {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.APIError(res.data.message)
+        }
+      })
+      .catch(error => {
+        this.APIError(error.response)
+      })
   },
-  
+
   /**
    * 获取所有图片
    */
-  getAllPictures(data, cb){
+  getAllPictures(data, cb) {
     _v.$http.get(this.data.host + 'pictures', {
-      params: data
-    })
-    .then(res => {
-      if ('OK' === res.data.code) {
-        typeof cb === 'function' && cb(res)
-      } else {
-        this.APIError(res.data.message)
-      }
-    })
-    .catch(error => {
-      this.APIError(error.response)      
-    })
+        params: data
+      })
+      .then(res => {
+        if ('OK' === res.data.code) {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.APIError(res.data.message)
+        }
+      })
+      .catch(error => {
+        this.APIError(error.response)
+      })
   },
 
   /**
    * 删除图片
    */
-  deletePicture(id, cb){
+  deletePicture(id, cb) {
     _v.$http.get(this.data.host + 'picture/delete/' + id)
-    .then(res => {
-      if ('OK' === res.data.code) {
-        typeof cb === 'function' && cb(res)
-      } else {
-        this.APIError(res.data.message)
-      }
-    })
-    .catch(error => {
-      this.APIError(error.response)      
-    })
+      .then(res => {
+        if ('OK' === res.data.code) {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.APIError(res.data.message)
+        }
+      })
+      .catch(error => {
+        this.APIError(error.response)
+      })
   }
 }

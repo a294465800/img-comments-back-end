@@ -6,10 +6,6 @@
   background-color: #242f42;
 }
 
-
-
-
-
 /* header 样式 */
 
 header {
@@ -20,7 +16,7 @@ header {
 }
 
 header::after {
-  content: '';
+  content: "";
   display: block;
   clear: both;
 }
@@ -57,10 +53,6 @@ header::after {
   margin: 0 20px;
 }
 
-
-
-
-
 /* 左侧导航 */
 
 .nav-bar {
@@ -86,10 +78,6 @@ header::after {
   height: 100%;
 }
 
-
-
-
-
 /* 内容 */
 
 .content-wrap {
@@ -101,8 +89,7 @@ header::after {
   left: 200px;
   right: 0;
   background-color: #fff;
-  overflow-y: scroll;
-  overflow-x: auto;
+  overflow: auto;
   padding: 20px 30px;
   /* display: flex;
   flex-direction: column; */
@@ -128,7 +115,6 @@ header::after {
     overflow-x: auto;
   }
 }
-
 
 /*
 .pages {
@@ -192,21 +178,19 @@ export default {
   data() {
     return {
       currentOpen: this.$route.path
-    }
+    };
   },
 
-  created() {
-  },
+  created() {},
 
   methods: {
-
     //退出
     logout() {
-      sessionStorage.clear()
-      this.$router.push('/login')
+      sessionStorage.clear();
+      this.$router.push("/login");
     }
   }
-}
+};
 </script>
 
 

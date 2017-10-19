@@ -1,6 +1,6 @@
 <style scoped>
 .operation-top::after {
-  content: '';
+  content: "";
   display: block;
   clear: both;
 }
@@ -51,7 +51,7 @@
         <el-table-column prop="description" label="简介" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column label="操作" align="center">
           <template scope="scope">
-            <!-- <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
+            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
             <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -72,236 +72,262 @@
 export default {
   data() {
     return {
-
       //教师类型
-      teacherTypes: ['建筑学', '城规', '美术学', '景观'],
+      teacherTypes: ["建筑学", "城规", "美术学", "景观"],
 
       //搜索框
-      search: '',
-      select: '',
+      search: "",
+      select: "",
 
       //教师信息表单
       newTeacherInfo: {
-        name: '',
-        number: '',
-        description: ''
+        name: "",
+        number: "",
+        description: "",
+        category: ""
+      },
+
+      editTeacherInfo: {
+        name: "",
+        code: "",
+        description: "",
+        category: ""
       },
 
       total: 32,
       currentPage: 1,
 
-      tableData: [],
-    }
+      tableData: []
+    };
   },
 
   created() {
-    this.$api.getTeachers('', (res) => {
+    this.$api.getTeachers("", res => {
       this.tableData = res.data.data
     })
   },
 
   methods: {
-
-    //教师搜索
-    searchTeacher() {
-      console.log('hi')
-    },
-
     //老师表单校验
     checkTeacherInfo() {
       if (this.newTeacherInfo.name && this.newTeacherInfo.number) {
-        return true
+        return true;
       }
-      return false
+      return false;
     },
 
     //同步分类
     SyncTeacherType(event) {
-      const select = document.querySelector('#selectInput input')
-      select.value = event.target.innerHTML.replace(/[<>\/span]/g, '')
+      const select = document.querySelector("#selectInput input");
+      select.value = event.target.innerHTML.replace(/[<>\/span]/g, "");
     },
 
     //新增老师
     newTeacher() {
-      const self = this
-      const h = this.$createElement
+      const self = this;
+      const h = this.$createElement;
       this.$msgbox({
-        title: '新增教师（注：工号无法二次修改！）',
-        message: h('el-form',
+        title: "新增教师",
+        message: h(
+          "el-form",
           {
             props: {
-              'label-position': "top",
-              'label-width': "80px"
+              "label-position": "top",
+              "label-width": "80px"
             }
-          }, [
-            h('el-form-item',
+          },
+          [
+            h(
+              "el-form-item",
               {
                 props: {
-                  label: '教师名称'
+                  label: "教师名称"
                 }
-              }, [
-                h('el-input',
-                  {
-                    props: {
-                      placeholder: '请输入教师名称'
-                    },
-                    on: {
-                      input: value => {
-                        this.newTeacherInfo.name = value
-                      }
+              },
+              [
+                h("el-input", {
+                  props: {
+                    placeholder: "请输入教师名称"
+                  },
+                  on: {
+                    input: value => {
+                      this.newTeacherInfo.name = value;
                     }
-                  })
-              ]),
-            h('el-form-item',
+                  }
+                })
+              ]
+            ),
+            h(
+              "el-form-item",
               {
                 props: {
-                  label: '工号'
+                  label: "工号"
                 }
-              }, [
-                h('el-input',
-                  {
-                    props: {
-                      placeholder: '请输入工号'
-                    },
-                    on: {
-                      input: value => {
-                        this.newTeacherInfo.number = value
-                      }
+              },
+              [
+                h("el-input", {
+                  props: {
+                    placeholder: "请输入工号"
+                  },
+                  on: {
+                    input: value => {
+                      this.newTeacherInfo.number = value;
                     }
-                  })
-              ]),
-            h('el-select',
+                  }
+                })
+              ]
+            ),
+            h(
+              "el-select",
               {
                 domProps: {
-                  id: 'selectInput',
+                  id: "selectInput"
                 },
                 props: {
-                  placeholder: '请选择教师类型',
+                  placeholder: "请选择教师类型"
                 },
                 on: {
                   input: value => {
-                    this.newTeacherInfo.category = value
+                    this.newTeacherInfo.category = value;
                   }
                 }
-              }, [
-                h('el-option', {
+              },
+              [
+                h("el-option", {
                   props: {
                     key: 1,
-                    label: '建筑学',
+                    label: "建筑学",
                     value: 1
                   },
                   nativeOn: {
                     click: event => {
-                      this.SyncTeacherType(event)
+                      this.SyncTeacherType(event);
                     }
                   }
                 }),
-                h('el-option', {
+                h("el-option", {
                   props: {
                     key: 2,
-                    label: '城规',
+                    label: "城规",
                     value: 2
                   },
                   nativeOn: {
                     click: event => {
-                      this.SyncTeacherType(event)
+                      this.SyncTeacherType(event);
                     }
                   }
                 }),
-                h('el-option', {
+                h("el-option", {
                   props: {
                     key: 3,
-                    label: '美术学',
+                    label: "美术学",
                     value: 3
                   },
                   nativeOn: {
                     click: event => {
-                      this.SyncTeacherType(event)
+                      this.SyncTeacherType(event);
                     }
                   }
                 }),
-                h('el-option', {
+                h("el-option", {
                   props: {
                     key: 4,
-                    label: '景观',
+                    label: "景观",
                     value: 4
                   },
                   nativeOn: {
                     click: event => {
-                      this.SyncTeacherType(event)
+                      this.SyncTeacherType(event);
                     }
                   }
-                }),
-              ]),
-            h('el-form-item',
+                })
+              ]
+            ),
+            h(
+              "el-form-item",
               {
                 domProps: {
-                  style: 'margin-top: 20px',
+                  style: "margin-top: 20px"
                 },
                 props: {
-                  label: '简介'
+                  label: "简介"
                 }
-              }, [
-                h('el-input',
-                  {
-                    props: {
-                      placeholder: '请输入简介',
-                      type: 'textarea'
-                    },
-                    on: {
-                      input: value => {
-                        this.newTeacherInfo.description = value
-                      }
+              },
+              [
+                h("el-input", {
+                  props: {
+                    placeholder: "请输入简介",
+                    type: "textarea"
+                  },
+                  on: {
+                    input: value => {
+                      this.newTeacherInfo.description = value;
                     }
-                  })
-              ]),
-          ]),
+                  }
+                })
+              ]
+            )
+          ]
+        ),
         showCancelButton: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
         beforeClose: (action, instance, done) => {
-          if (action === 'confirm') {
-            if (this.newTeacherInfo.name.length > 10 || (/\d/).test(this.newTeacherInfo.name)) {
+          if (action === "confirm") {
+            if(!(this.newTeacherInfo.name && this.newTeacherInfo.category && this.newTeacherInfo.description && this.newTeacherInfo.number)){
               this.$message({
                 type: 'warning',
-                message: '名称不能为数字且10字以内'
+                message: '信息不能为空',
+                showClose: true,
               })
-            } else if (!(/^[0-9]*$/).test(this.newTeacherInfo.number)) {
+              return false
+            }
+            if (
+              this.newTeacherInfo.name.length > 10 ||
+              /\d/.test(this.newTeacherInfo.name)
+            ) {
               this.$message({
-                type: 'warning',
-                message: '工号只能为数字'
-              })
+                type: "warning",
+                message: "名称不能为数字且10字以内"
+              });
+            } else if (!/^[0-9]*$/.test(this.newTeacherInfo.number)) {
+              this.$message({
+                type: "warning",
+                message: "工号只能为数字"
+              });
             } else if (this.newTeacherInfo.description.length > 50) {
               this.$message({
-                type: 'warning',
-                message: '教师简介请控制在50字以内'
-              })
+                type: "warning",
+                message: "教师简介请控制在50字以内"
+              });
             } else {
-              done()
+              done();
             }
           } else {
-            done()
+            done();
           }
         }
-      }).then(action => {
-        this.$api.addTeacher(this.newTeacherInfo, res => {
-          this.$message({
-            type: 'success',
-            message: '新增成功！'
-          })
-          window.location.reload()
-        })
-      }).catch(cancel => {
-        this.$message({
-          type: 'info',
-          message: '取消了操作'
-        })
       })
+        .then(action => {
+          this.$api.addTeacher(this.newTeacherInfo, res => {
+            this.$message({
+              type: "success",
+              message: "新增成功！"
+            });
+            window.location.reload();
+          });
+        })
+        .catch(cancel => {
+          this.$message({
+            type: "info",
+            message: "取消了操作"
+          });
+        });
     },
 
     //修改目录输出
     addCategory(row, column, cellValue) {
-      return this.teacherTypes[cellValue - 1]
+      return this.teacherTypes[cellValue - 1];
     },
 
     //格式化次数
@@ -315,118 +341,240 @@ export default {
     // },
 
     //教师编辑
-    // handleEdit(index, row) {
-    //   this.newTeacherInfo.name = row.name
-    //   this.newTeacherInfo.number = row.number
-    //   const h = this.$createElement
-    //   this.$msgbox({
-    //     title: '修改教师',
-    //     message: h('el-form',
-    //       {
-    //         props: {
-    //           'label-position': "top",
-    //           'label-width': "80px"
-    //         }
-    //       }, [
-    //         h('el-form-item',
-    //           {
-    //             props: {
-    //               label: '教师名称'
-    //             }
-    //           }, [
-    //             h('el-input',
-    //               {
-    //                 props: {
-    //                   placeholder: '请输入教师名称',
-    //                   value: row.name,
-    //                 },
-    //                 on: {
-    //                   input: value => {
-    //                     this.newTeacherInfo.name = value
-    //                   }
-    //                 }
-    //               })
-    //           ]),
-    //         h('el-form-item',
-    //           {
-    //             props: {
-    //               label: '工号'
-    //             }
-    //           }, [
-    //             h('el-input',
-    //               {
-    //                 props: {
-    //                   placeholder: '请输入工号',
-    //                   value: row.number,
-    //                 },
-    //                 on: {
-    //                   input: value => {
-    //                     this.newTeacherInfo.number = value
-    //                   }
-    //                 }
-    //               })
-    //           ]),
-    //       ]),
-    //     showCancelButton: true,
-    //     confirmButtonText: '确定',
-    //     cancelButtonText: '取消',
-    //     beforeClose: (action, instance, done) => {
-    //       if (action === 'confirm') {
-    //         if (this.checkTeacherInfo()) {
-    //           done()
-    //         } else {
-    //           this.$message({
-    //             type: 'error',
-    //             message: '不能留空！'
-    //           })
-    //         }
-    //       } else {
-    //         done()
-    //       }
-    //     }
-    //   }).then(action => {
-    //     this.tableData[index].name = this.newTeacherInfo.name
-    //     this.tableData[index].number = this.newTeacherInfo.number
-    //     this.$message({
-    //       type: 'success',
-    //       message: '修改成功！'
-    //     })
-    //   }).catch(cancel => {
-    //     this.$message({
-    //       type: 'info',
-    //       message: '取消了操作'
-    //     })
-    //   })
-    // },
+    handleEdit(index, row) {
+      this.editTeacherInfo.name = row.name;
+      this.editTeacherInfo.code = row.number;
+      this.editTeacherInfo.category = row.category;
+      this.editTeacherInfo.description = row.description;
+      const h = this.$createElement;
+      this.$msgbox({
+        title: "修改教师",
+        message: h(
+          "el-form",
+          {
+            props: {
+              "label-position": "top",
+              "label-width": "80px"
+            }
+          },
+          [
+            h(
+              "el-form-item",
+              {
+                props: {
+                  label: "教师名称"
+                }
+              },
+              [
+                h("el-input", {
+                  props: {
+                    placeholder: "请输入教师名称",
+                    value: row.name
+                  },
+                  on: {
+                    input: value => {
+                      this.editTeacherInfo.name = value;
+                    }
+                  }
+                })
+              ]
+            ),
+            h(
+              "el-form-item",
+              {
+                props: {
+                  label: "工号"
+                }
+              },
+              [
+                h("el-input", {
+                  props: {
+                    placeholder: "请输入工号",
+                    value: row.number
+                  },
+                  on: {
+                    input: value => {
+                      this.editTeacherInfo.code = value;
+                    }
+                  }
+                })
+              ]
+            ),
+            h(
+              "el-select",
+              {
+                domProps: {
+                  id: "selectInput"
+                },
+                props: {
+                  placeholder: "请选择教师类型",
+                  value: row.category
+                },
+                on: {
+                  input: value => {
+                    this.editTeacherInfo.category = value;
+                  }
+                }
+              },
+              [
+                h("el-option", {
+                  props: {
+                    key: 1,
+                    label: "建筑学",
+                    value: 1
+                  },
+                  nativeOn: {
+                    click: event => {
+                      this.SyncTeacherType(event);
+                    }
+                  }
+                }),
+                h("el-option", {
+                  props: {
+                    key: 2,
+                    label: "城规",
+                    value: 2
+                  },
+                  nativeOn: {
+                    click: event => {
+                      this.SyncTeacherType(event);
+                    }
+                  }
+                }),
+                h("el-option", {
+                  props: {
+                    key: 3,
+                    label: "美术学",
+                    value: 3
+                  },
+                  nativeOn: {
+                    click: event => {
+                      this.SyncTeacherType(event);
+                    }
+                  }
+                }),
+                h("el-option", {
+                  props: {
+                    key: 4,
+                    label: "景观",
+                    value: 4
+                  },
+                  nativeOn: {
+                    click: event => {
+                      this.SyncTeacherType(event);
+                    }
+                  }
+                })
+              ]
+            ),
+            h(
+              "el-form-item",
+              {
+                domProps: {
+                  style: "margin-top: 20px"
+                },
+                props: {
+                  label: "简介"
+                }
+              },
+              [
+                h("el-input", {
+                  props: {
+                    placeholder: "请输入简介",
+                    type: "textarea",
+                    value: row.description
+                  },
+                  on: {
+                    input: value => {
+                      this.editTeacherInfo.description = value;
+                    }
+                  }
+                })
+              ]
+            )
+          ]
+        ),
+        showCancelButton: true,
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        beforeClose: (action, instance, done) => {
+          if (action === "confirm") {
+            if (
+              this.editTeacherInfo.name.length > 10 ||
+              /\d/.test(this.editTeacherInfo.name)
+            ) {
+              this.$message({
+                type: "warning",
+                message: "名称不能为数字且10字以内"
+              });
+            } else if (!/^[0-9]*$/.test(this.editTeacherInfo.code)) {
+              this.$message({
+                type: "warning",
+                message: "工号只能为数字"
+              });
+            } else if (this.editTeacherInfo.description.length > 50) {
+              this.$message({
+                type: "warning",
+                message: "教师简介请控制在50字以内"
+              });
+            } else {
+              done();
+            }
+          } else {
+            done();
+          }
+        }
+      })
+        .then(action => {
+          this.$api.editTeacher(this.editTeacherInfo, row.id, data => {
+            this.tableData[index].name = this.editTeacherInfo.name;
+            this.tableData[index].number = this.editTeacherInfo.code;
+            this.tableData[index].category = this.editTeacherInfo.category;
+            this.tableData[
+              index
+            ].description = this.editTeacherInfo.description;
+            this.$message({
+              type: "success",
+              message: "修改成功！"
+            });
+          });
+        })
+        .catch(cancel => {
+          this.$message({
+            type: "info",
+            message: "取消了操作"
+          });
+        });
+    },
 
     //教师删除
     handleDelete(index, row) {
-      this.$confirm('此操作将删除该教师数据, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$api.deleteTeacher(row.id, res => {
-          this.tableData.splice(index, 1)
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
+      this.$confirm("此操作将删除该教师数据, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
-    },
+        .then(() => {
+          this.$api.deleteTeacher(row.id, res => {
+            this.tableData.splice(index, 1);
+            this.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+    }
 
     //页码跳转
     // handleCurrentChange(e) {
     //   console.log(e, this.$api.sayHi())
     // },
-
-
   }
-}
+};
 </script>
