@@ -97,14 +97,27 @@ export default {
       total: 32,
       currentPage: 1,
 
-      tableData: []
+      tableData: [
+        {
+          id: 1,
+          category: 1,
+          name: "三大打算",
+          description: "撒旦"
+        },
+        {
+          id: 2,
+          category: 2,
+          name: "三大打算",
+          description: "撒旦"
+        }
+      ]
     };
   },
 
   created() {
-    this.$api.getTeachers("", res => {
-      this.tableData = res.data.data
-    })
+    // this.$api.getTeachers("", res => {
+    //   this.tableData = res.data.data
+    // })
   },
 
   methods: {
@@ -274,13 +287,20 @@ export default {
         cancelButtonText: "取消",
         beforeClose: (action, instance, done) => {
           if (action === "confirm") {
-            if(!(this.newTeacherInfo.name && this.newTeacherInfo.category && this.newTeacherInfo.description && this.newTeacherInfo.number)){
+            if (
+              !(
+                this.newTeacherInfo.name &&
+                this.newTeacherInfo.category &&
+                this.newTeacherInfo.description &&
+                this.newTeacherInfo.number
+              )
+            ) {
               this.$message({
-                type: 'warning',
-                message: '信息不能为空',
-                showClose: true,
-              })
-              return false
+                type: "warning",
+                message: "信息不能为空",
+                showClose: true
+              });
+              return false;
             }
             if (
               this.newTeacherInfo.name.length > 10 ||
@@ -408,7 +428,7 @@ export default {
                 },
                 props: {
                   placeholder: "请选择教师类型",
-                  value: row.category
+                  value: this.teacherTypes[row.category * 1 - 1]
                 },
                 on: {
                   input: value => {

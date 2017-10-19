@@ -62,7 +62,7 @@
         <el-table-column prop="nickname" label="用户名称" align="center"></el-table-column>
         <el-table-column prop="avatarUrl" label="用户头像" align="center">
            <template scope="scope">
-            <img :src="'https://www.arch-seu.com/' + scope.row.avatarUrl" :alt="scope.row.nickname" :title="scope.row.nickname" style="height: 40px; text-align: center; vertical-align: middle; cursor: pointer;border-radius: 50%;">
+            <img :src="scope.row.avatarUrl" :alt="scope.row.nickname" :title="scope.row.nickname" style="height: 40px; text-align: center; vertical-align: middle; cursor: pointer;border-radius: 50%;">
           </template>
         </el-table-column>
         <el-table-column label="图片预览" align="center">
