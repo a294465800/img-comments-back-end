@@ -5,6 +5,11 @@
   clear: both;
 }
 
+.content-wrap {
+  overflow: auto;
+  height: 100%;
+}
+
 .operation-btn {
   float: left;
 }
@@ -12,6 +17,11 @@
 .operation-search {
   float: right;
   width: 450px;
+}
+
+.pages {
+  margin-top: 20px;
+  text-align: right;
 }
 </style>
 
@@ -60,10 +70,10 @@
     <!-- /表格内容 -->
 
     <!-- 分页 -->
-    <!-- <div class="pages">
-                              <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
-                              </el-pagination>
-                            </div> -->
+    <div class="pages">
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
+      </el-pagination>
+    </div>
     <!-- /分页 -->
   </section>
 </template>
@@ -94,7 +104,7 @@ export default {
         category: ""
       },
 
-      total: 32,
+      total: 100,
       currentPage: 1,
 
       tableData: []
@@ -102,7 +112,10 @@ export default {
   },
 
   created() {
-    this.$api.getTeachers("", res => {
+    this.$api.getTeacherCount("", res => {
+      this.total = res.data.data;
+    });
+    this.$api.getTeachers({ page: 1 }, res => {
       this.tableData = res.data.data;
     });
   },
@@ -576,12 +589,14 @@ export default {
             message: "已取消删除"
           });
         });
-    }
+    },
 
     //页码跳转
-    // handleCurrentChange(e) {
-    //   console.log(e, this.$api.sayHi())
-    // },
+    handleCurrentChange(page) {
+      this.$api.getTeachers({ page: page }, res => {
+        this.tableData = res.data.data;
+      });
+    }
   }
 };
 </script>

@@ -43,6 +43,18 @@ export default {
     })
   },
 
+  getTeacherCount() {
+    _v.$http.get(this.data.host + 'count/teachers').then(res => {
+      if ('OK' === res.data.code) {
+        typeof cb === 'function' && cb(res)
+      } else {
+        this.APIError(res.data.message)
+      }
+    }).catch(error => {
+      this.APIError(error.response)
+    })
+  },
+
   //新增老师信息
   addTeacher(data, cb) {
     _v.$http.post(this.data.host + 'teacher', _v.$qs.stringify(data))
