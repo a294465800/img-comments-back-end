@@ -43,6 +43,7 @@ export default {
     })
   },
 
+  //获取教师总数
   getTeacherCount() {
     _v.$http.get(this.data.host + 'count/teachers').then(res => {
       if ('OK' === res.data.code) {
