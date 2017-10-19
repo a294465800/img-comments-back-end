@@ -83,7 +83,7 @@ header::after {
 .content-wrap {
   position: absolute;
   width: auto;
-  height: 100%;
+  /* height: 100%; */
   top: 70px;
   bottom: 0;
   left: 200px;
