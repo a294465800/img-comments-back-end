@@ -57,6 +57,7 @@
       <el-table :data="tableData" border :stripe="true">
         <el-table-column prop="category" label="分类" :formatter="addCategory" align="center"></el-table-column>
         <el-table-column prop="name" label="姓名" align="center"></el-table-column>
+        <el-table-column prop="email" label="邮箱" align="center"></el-table-column>
         <el-table-column prop="number" label="工号" align="center"></el-table-column>
         <el-table-column prop="description" label="简介" align="center" show-overflow-tooltip></el-table-column>
         <el-table-column label="操作" align="center">
@@ -94,7 +95,8 @@ export default {
         name: "",
         number: "",
         description: "",
-        category: ""
+        category: "",
+        email: ""
       },
 
       editTeacherInfo: {
@@ -165,6 +167,26 @@ export default {
                   on: {
                     input: value => {
                       this.newTeacherInfo.name = value;
+                    }
+                  }
+                })
+              ]
+            ),
+            h(
+              "el-form-item",
+              {
+                props: {
+                  label: "教师邮箱"
+                }
+              },
+              [
+                h("el-input", {
+                  props: {
+                    placeholder: "请输入教师邮箱"
+                  },
+                  on: {
+                    input: value => {
+                      this.newTeacherInfo.email = value;
                     }
                   }
                 })
@@ -292,7 +314,8 @@ export default {
                 this.newTeacherInfo.name &&
                 this.newTeacherInfo.category &&
                 this.newTeacherInfo.description &&
-                this.newTeacherInfo.number
+                this.newTeacherInfo.number &&
+                this.newTeacherInfo.email
               )
             ) {
               this.$message({
@@ -366,6 +389,7 @@ export default {
       this.editTeacherInfo.code = row.number;
       this.editTeacherInfo.category = row.category;
       this.editTeacherInfo.description = row.description;
+      this.editTeacherInfo.email = row.email;
       const h = this.$createElement;
       this.$msgbox({
         title: "修改教师",
@@ -394,6 +418,27 @@ export default {
                   on: {
                     input: value => {
                       this.editTeacherInfo.name = value;
+                    }
+                  }
+                })
+              ]
+            ),
+            h(
+              "el-form-item",
+              {
+                props: {
+                  label: "教师邮件"
+                }
+              },
+              [
+                h("el-input", {
+                  props: {
+                    placeholder: "请输入教师邮件",
+                    value: row.email
+                  },
+                  on: {
+                    input: value => {
+                      this.editTeacherInfo.email = value;
                     }
                   }
                 })
@@ -550,6 +595,7 @@ export default {
             this.tableData[index].name = this.editTeacherInfo.name;
             this.tableData[index].number = this.editTeacherInfo.code;
             this.tableData[index].category = this.editTeacherInfo.category;
+            this.tableData[index].email = this.editTeacherInfo.email;
             this.tableData[
               index
             ].description = this.editTeacherInfo.description;
