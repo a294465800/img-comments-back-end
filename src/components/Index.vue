@@ -83,7 +83,6 @@ header::after {
 .content-wrap {
   position: absolute;
   width: auto;
-  /* height: 100%; */
   top: 70px;
   bottom: 0;
   left: 200px;
@@ -91,8 +90,6 @@ header::after {
   background-color: #fff;
   overflow: auto;
   padding: 20px 30px;
-  /* display: flex;
-  flex-direction: column; */
 }
 
 .breadcrumb {

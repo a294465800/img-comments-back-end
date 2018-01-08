@@ -5,11 +5,6 @@
   clear: both;
 }
 
-.content-wrap {
-  overflow: auto;
-  height: 100%;
-}
-
 .operation-btn {
   float: left;
 }
